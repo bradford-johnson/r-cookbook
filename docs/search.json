@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "collecting-data.html",
+    "href": "collecting-data.html",
+    "title": "",
+    "section": "",
+    "text": "The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip collecting the data.\nBut what if we wanted to gain different insights that require new data? Then we would need to collect new data. Depending on what I was doing I could add more data to the current data I have, or create a new set of data all together.\nAn important\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "This is a Quarto cookbook for R created by Bradford Johnson.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\nThis Quarto book contains vignettes of R."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  }
+]
