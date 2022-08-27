@@ -8,7 +8,7 @@ The way we collect data varies from using a pencil and notepad, to an automated 
 
 Below I will show a simple script using the `rvest`, `lubridate` and `tidyverse` packages that can scrape us some data from [Steam's](https://store.steampowered.com/stats/) game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live *Top games by current player count* table.
 
-```{r warning=FALSE,message=FALSE,error=FALSE,results='hide'}
+```{r warning=FALSE,message=FALSE,error=FALSE}
 # load packages
 library(tidyverse)
 library(rvest)
@@ -32,7 +32,7 @@ df = data.frame(game, current_players)
 # get current date
 current_date <- as_datetime(Sys.Date())
 
-# update data fram with mutated column that adds current_date
+# update data frame with mutated column that adds current_date
 df <- df %>% 
   mutate(date = current_date)
  
