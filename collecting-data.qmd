@@ -6,12 +6,13 @@ But what if we wanted to gain different insights that require new data? Then we 
 
 The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the `rvest` package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting and frustration).
 
-Below I will show a simple script using the `rvest`, and `tidyverse` packages that can scrape us some data from [Steam's](https://store.steampowered.com/stats/) game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live 'Top games by current player count' table.
+Below I will show a simple script using the `rvest`, `lubridate` and `tidyverse` packages that can scrape us some data from [Steam's](https://store.steampowered.com/stats/) game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live *Top games by current player count* table.
 
 ```{r warning=FALSE,message=FALSE,error=FALSE,results='hide'}
 # load packages
 library(tidyverse)
 library(rvest)
+library(lubridate)
 
 # link to get data from
 link = "https://store.steampowered.com/stats/" 
@@ -37,7 +38,7 @@ df <- df %>%
  
 ```
 
-Now lets see how our data frame looks.
+Now lets see the first 6 rows of our new data frame.
 
 ```{r}
 head(df)
