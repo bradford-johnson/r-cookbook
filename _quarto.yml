@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "R-Cookbook"
+  author: "Bradford Johnson"
+  date: "8/27/2022"
+  chapters:
+    - index.qmd
+    - collecting-data.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
