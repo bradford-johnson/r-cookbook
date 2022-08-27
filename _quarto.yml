@@ -22,3 +22,12 @@ format:
 
 editor: visual
 
+website:
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - collecting-data.qmd
+      
