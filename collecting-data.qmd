@@ -40,6 +40,6 @@ df <- df %>%
 
 Now lets see the first 6 rows of our new data frame.
 
-```{r}
+```{r warning=FALSE,message=FALSE,error=FALSE}
 head(df)
 ```
