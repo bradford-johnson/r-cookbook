@@ -31,8 +31,6 @@ df = data.frame(game, current_players)
 # get current date
 current_date <- as_datetime(Sys.Date())
 
-# create time stamp for when code is run
-
 # update data fram with mutated column that adds current_date
 df <- df %>% 
   mutate(date = current_date)
