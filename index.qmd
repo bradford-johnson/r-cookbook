@@ -1,6 +1,6 @@
-# Preface {.unnumbered}
+# About {.unnumbered}
 
-This is a Quarto cookbook for R created by Bradford Johnson.
+This is a cookbook for R created by Bradford Johnson.
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
