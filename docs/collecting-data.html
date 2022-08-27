@@ -183,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># get current date</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>current_date <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="fu">Sys.Date</span>())</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># update data fram with mutated column that adds current_date</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># update data frame with mutated column that adds current_date</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> current_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -192,12 +192,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              game current_players       date
-1 Counter-Strike: Global Offensive         735,725 2022-08-27
-2                           Dota 2         633,818 2022-08-27
-3                         Lost Ark         249,282 2022-08-27
-4                     Apex Legends         208,649 2022-08-27
-5              PUBG: BATTLEGROUNDS         174,273 2022-08-27
-6                        Destiny 2         154,746 2022-08-27</code></pre>
+1 Counter-Strike: Global Offensive         740,365 2022-08-27
+2                           Dota 2         630,555 2022-08-27
+3                         Lost Ark         248,256 2022-08-27
+4                     Apex Legends         203,109 2022-08-27
+5              PUBG: BATTLEGROUNDS         169,529 2022-08-27
+6                        Destiny 2         155,954 2022-08-27</code></pre>
 </div>
 </div>
 
