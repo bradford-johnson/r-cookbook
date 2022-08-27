@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">Home</a>
+    <a class="nav-link" href="./index.html">Preface</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./collecting-data.html" aria-current="page">Collecting Data</a>
@@ -161,297 +161,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Below I will show a simple script using the <code>rvest</code> package and <code>tidyverse</code> package that can scrape us some data from <a href="https://store.steampowered.com/stats/">Steam’s</a> game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live ‘Top games by current player count’ table.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyverse' was built under R version 4.1.3</code></pre>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># link to get data from</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>link <span class="ot">=</span> <span class="st">"https://store.steampowered.com/stats/"</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># read webpage at the above link</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>page <span class="ot">=</span> <span class="fu">read_html</span>(link) </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape top 100 games by current players</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>game <span class="ot">=</span> page <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="st">".gameLink"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text</span>()  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape number of players for each game </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>current_players <span class="ot">=</span> page <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="st">"td:nth-child(1) .currentServers"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text</span>() </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># put both game and player data into a data frame</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(game, current_players) </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># get current date</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>current_date <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="fu">Sys.Date</span>())</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># create time stamp for when code is run</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># update data fram with mutated column that adds current_date</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> current_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>-- Attaching packages --------------------------------------- tidyverse 1.3.2 --
-v ggplot2 3.3.6     v purrr   0.3.4
-v tibble  3.1.8     v dplyr   1.0.9
-v tidyr   1.2.0     v stringr 1.4.1
-v readr   2.1.2     v forcats 0.5.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tibble' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'stringr' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'forcats' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>-- Conflicts ------------------------------------------ tidyverse_conflicts() --
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'rvest' was built under R version 4.1.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'rvest'
-
-The following object is masked from 'package:readr':
-
-    guess_encoding</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'lubridate'
-
-The following objects are masked from 'package:base':
-
-    date, intersect, setdiff, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># link to get data from</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>link <span class="ot">=</span> <span class="st">"https://store.steampowered.com/stats/"</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read webpage at the above link</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>page <span class="ot">=</span> <span class="fu">read_html</span>(link) </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape top 100 games by current players</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>game <span class="ot">=</span> page <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="st">".gameLink"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text</span>()  </span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape number of players for each game </span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>current_players <span class="ot">=</span> page <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="st">"td:nth-child(1) .currentServers"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text</span>() </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># put both game and player data into a data frame</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(game, current_players) </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># get current date</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>current_date <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="fu">Sys.Date</span>())</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create timestamp for when code is run</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>current_time <span class="ot">&lt;-</span> <span class="fu">timestamp</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now lets see how our data frame looks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##------ Sat Aug 27 14:14:46 2022 ------##</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># update data fram with mutated columns that add current_date and current_time</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> current_date) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> current_time)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># lets see our data we got</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                           game current_players       date
-1              Counter-Strike: Global Offensive         725,188 2022-08-27
-2                                        Dota 2         645,169 2022-08-27
-3                                      Lost Ark         252,565 2022-08-27
-4                                  Apex Legends         226,470 2022-08-27
-5                           PUBG: BATTLEGROUNDS         191,545 2022-08-27
-6                                     Destiny 2         150,022 2022-08-27
-7                            Grand Theft Auto V         128,665 2022-08-27
-8                               Team Fortress 2         107,009 2022-08-27
-9                                          Rust         102,562 2022-08-27
-10                     Total War: WARHAMMER III          98,872 2022-08-27
-11                                Path of Exile          72,771 2022-08-27
-12                                      FIFA 22          72,128 2022-08-27
-13                        ARK: Survival Evolved          63,593 2022-08-27
-14                        Football Manager 2022          62,205 2022-08-27
-15                             Wallpaper Engine          54,873 2022-08-27
-16                                  War Thunder          54,755 2022-08-27
-17                     FINAL FANTASY XIV Online          47,495 2022-08-27
-18                           NARAKA: BLADEPOINT          43,680 2022-08-27
-19                  Sid Meier's Civilization VI          43,302 2022-08-27
-20                                  Garry's Mod          40,951 2022-08-27
-21                            Hearts of Iron IV          39,945 2022-08-27
-22               Tom Clancy's Rainbow Six Siege          39,845 2022-08-27
-23                                         MIR4          39,797 2022-08-27
-24                                     Warframe          39,509 2022-08-27
-25                                         DayZ          39,103 2022-08-27
-26                             Dead by Daylight          38,720 2022-08-27
-27                                   ELDEN RING          37,368 2022-08-27
-28                      SUPER PEOPLE FINAL BETA          34,890 2022-08-27
-29                               Stardew Valley          34,162 2022-08-27
-30                                     Terraria          32,250 2022-08-27
-31                          MONSTER HUNTER RISE          32,245 2022-08-27
-32                                     PAYDAY 2          31,388 2022-08-27
-33  The Elder Scrolls V: Skyrim Special Edition          30,946 2022-08-27
-34                                7 Days to Die          30,673 2022-08-27
-35                                Rocket League          29,756 2022-08-27
-36                       Euro Truck Simulator 2          29,756 2022-08-27
-37                                 Stumble Guys          29,717 2022-08-27
-38                              Project Zomboid          27,571 2022-08-27
-39                                   tModLoader          27,564 2022-08-27
-40                         Farming Simulator 22          27,554 2022-08-27
-41                                     Spacewar          27,306 2022-08-27
-42                         World of Tanks Blitz          26,480 2022-08-27
-43                                     Unturned          25,732 2022-08-27
-44                                  MultiVersus          25,434 2022-08-27
-45                                    Fallout 4          23,477 2022-08-27
-46                                     RimWorld          22,991 2022-08-27
-47                            Age of Empires IV          22,845 2022-08-27
-48                                       VRChat          22,630 2022-08-27
-49               Marvel’s Spider-Man Remastered          21,568 2022-08-27
-50                        Europa Universalis IV          21,452 2022-08-27
-51                                    New World          21,379 2022-08-27
-52                     The Elder Scrolls Online          20,946 2022-08-27
-53                   Sid Meier's Civilization V          20,829 2022-08-27
-54                               Hunt: Showdown          20,707 2022-08-27
-55                                Left 4 Dead 2          20,097 2022-08-27
-56                 Mount &amp; Blade II: Bannerlord          19,800 2022-08-27
-57                                         Raft          19,076 2022-08-27
-58                                  The Sims\231 4          19,041 2022-08-27
-59                                      Valheim          18,712 2022-08-27
-60                             Cities: Skylines          18,354 2022-08-27
-61                The Binding of Isaac: Rebirth          18,180 2022-08-27
-62                                       Arma 3          17,684 2022-08-27
-63                                        SMITE          17,586 2022-08-27
-64        Age of Empires II: Definitive Edition          17,484 2022-08-27
-65                           Crusader Kings III          16,969 2022-08-27
-66                        Don't Starve Together          16,771 2022-08-27
-67                                  Bloons TD 6          16,719 2022-08-27
-68                        Red Dead Redemption 2          16,624 2022-08-27
-69                                 Black Desert          16,422 2022-08-27
-70                       Yu-Gi-Oh!  Master Duel          16,388 2022-08-27
-71                               Sea of Thieves          16,125 2022-08-27
-72                             Cult of the Lamb          16,047 2022-08-27
-73                     The Witcher 3: Wild Hunt          15,893 2022-08-27
-74                                 Phasmophobia          15,858 2022-08-27
-75                                     Factorio          15,653 2022-08-27
-76                            Farthest Frontier          15,574 2022-08-27
-77                                   Brawlhalla          15,247 2022-08-27
-78                                     Soundpad          15,111 2022-08-27
-79                                    Stellaris          14,415 2022-08-27
-80                                 No Man's Sky          13,555 2022-08-27
-81                                Geometry Dash          12,928 2022-08-27
-82                        Monster Hunter: World          12,864 2022-08-27
-83                                 Dread Hunger          12,698 2022-08-27
-84                                     NBA 2K22          12,401 2022-08-27
-85                                 Satisfactory          12,363 2022-08-27
-86                                    Fall Guys          12,306 2022-08-27
-87                               Counter-Strike          12,286 2022-08-27
-88                               Cyberpunk 2077          12,102 2022-08-27
-89                    SD GUNDAM BATTLE ALLIANCE          11,986 2022-08-27
-90                           Across the Obelisk          11,681 2022-08-27
-91                      Total War: WARHAMMER II          11,336 2022-08-27
-92                            Vampire Survivors          11,278 2022-08-27
-93                                 BeamNG.drive          10,713 2022-08-27
-94                               Cookie Clicker          10,660 2022-08-27
-95                        Football Manager 2021          10,489 2022-08-27
-96                                 Conan Exiles          10,139 2022-08-27
-97                                   Fallout 76          10,006 2022-08-27
-98                                   The Forest           9,901 2022-08-27
-99                                Assetto Corsa           9,458 2022-08-27
-100                                       Squad           9,265 2022-08-27
-                                          time
-1   ##------ Sat Aug 27 14:14:46 2022 ------##
-2   ##------ Sat Aug 27 14:14:46 2022 ------##
-3   ##------ Sat Aug 27 14:14:46 2022 ------##
-4   ##------ Sat Aug 27 14:14:46 2022 ------##
-5   ##------ Sat Aug 27 14:14:46 2022 ------##
-6   ##------ Sat Aug 27 14:14:46 2022 ------##
-7   ##------ Sat Aug 27 14:14:46 2022 ------##
-8   ##------ Sat Aug 27 14:14:46 2022 ------##
-9   ##------ Sat Aug 27 14:14:46 2022 ------##
-10  ##------ Sat Aug 27 14:14:46 2022 ------##
-11  ##------ Sat Aug 27 14:14:46 2022 ------##
-12  ##------ Sat Aug 27 14:14:46 2022 ------##
-13  ##------ Sat Aug 27 14:14:46 2022 ------##
-14  ##------ Sat Aug 27 14:14:46 2022 ------##
-15  ##------ Sat Aug 27 14:14:46 2022 ------##
-16  ##------ Sat Aug 27 14:14:46 2022 ------##
-17  ##------ Sat Aug 27 14:14:46 2022 ------##
-18  ##------ Sat Aug 27 14:14:46 2022 ------##
-19  ##------ Sat Aug 27 14:14:46 2022 ------##
-20  ##------ Sat Aug 27 14:14:46 2022 ------##
-21  ##------ Sat Aug 27 14:14:46 2022 ------##
-22  ##------ Sat Aug 27 14:14:46 2022 ------##
-23  ##------ Sat Aug 27 14:14:46 2022 ------##
-24  ##------ Sat Aug 27 14:14:46 2022 ------##
-25  ##------ Sat Aug 27 14:14:46 2022 ------##
-26  ##------ Sat Aug 27 14:14:46 2022 ------##
-27  ##------ Sat Aug 27 14:14:46 2022 ------##
-28  ##------ Sat Aug 27 14:14:46 2022 ------##
-29  ##------ Sat Aug 27 14:14:46 2022 ------##
-30  ##------ Sat Aug 27 14:14:46 2022 ------##
-31  ##------ Sat Aug 27 14:14:46 2022 ------##
-32  ##------ Sat Aug 27 14:14:46 2022 ------##
-33  ##------ Sat Aug 27 14:14:46 2022 ------##
-34  ##------ Sat Aug 27 14:14:46 2022 ------##
-35  ##------ Sat Aug 27 14:14:46 2022 ------##
-36  ##------ Sat Aug 27 14:14:46 2022 ------##
-37  ##------ Sat Aug 27 14:14:46 2022 ------##
-38  ##------ Sat Aug 27 14:14:46 2022 ------##
-39  ##------ Sat Aug 27 14:14:46 2022 ------##
-40  ##------ Sat Aug 27 14:14:46 2022 ------##
-41  ##------ Sat Aug 27 14:14:46 2022 ------##
-42  ##------ Sat Aug 27 14:14:46 2022 ------##
-43  ##------ Sat Aug 27 14:14:46 2022 ------##
-44  ##------ Sat Aug 27 14:14:46 2022 ------##
-45  ##------ Sat Aug 27 14:14:46 2022 ------##
-46  ##------ Sat Aug 27 14:14:46 2022 ------##
-47  ##------ Sat Aug 27 14:14:46 2022 ------##
-48  ##------ Sat Aug 27 14:14:46 2022 ------##
-49  ##------ Sat Aug 27 14:14:46 2022 ------##
-50  ##------ Sat Aug 27 14:14:46 2022 ------##
-51  ##------ Sat Aug 27 14:14:46 2022 ------##
-52  ##------ Sat Aug 27 14:14:46 2022 ------##
-53  ##------ Sat Aug 27 14:14:46 2022 ------##
-54  ##------ Sat Aug 27 14:14:46 2022 ------##
-55  ##------ Sat Aug 27 14:14:46 2022 ------##
-56  ##------ Sat Aug 27 14:14:46 2022 ------##
-57  ##------ Sat Aug 27 14:14:46 2022 ------##
-58  ##------ Sat Aug 27 14:14:46 2022 ------##
-59  ##------ Sat Aug 27 14:14:46 2022 ------##
-60  ##------ Sat Aug 27 14:14:46 2022 ------##
-61  ##------ Sat Aug 27 14:14:46 2022 ------##
-62  ##------ Sat Aug 27 14:14:46 2022 ------##
-63  ##------ Sat Aug 27 14:14:46 2022 ------##
-64  ##------ Sat Aug 27 14:14:46 2022 ------##
-65  ##------ Sat Aug 27 14:14:46 2022 ------##
-66  ##------ Sat Aug 27 14:14:46 2022 ------##
-67  ##------ Sat Aug 27 14:14:46 2022 ------##
-68  ##------ Sat Aug 27 14:14:46 2022 ------##
-69  ##------ Sat Aug 27 14:14:46 2022 ------##
-70  ##------ Sat Aug 27 14:14:46 2022 ------##
-71  ##------ Sat Aug 27 14:14:46 2022 ------##
-72  ##------ Sat Aug 27 14:14:46 2022 ------##
-73  ##------ Sat Aug 27 14:14:46 2022 ------##
-74  ##------ Sat Aug 27 14:14:46 2022 ------##
-75  ##------ Sat Aug 27 14:14:46 2022 ------##
-76  ##------ Sat Aug 27 14:14:46 2022 ------##
-77  ##------ Sat Aug 27 14:14:46 2022 ------##
-78  ##------ Sat Aug 27 14:14:46 2022 ------##
-79  ##------ Sat Aug 27 14:14:46 2022 ------##
-80  ##------ Sat Aug 27 14:14:46 2022 ------##
-81  ##------ Sat Aug 27 14:14:46 2022 ------##
-82  ##------ Sat Aug 27 14:14:46 2022 ------##
-83  ##------ Sat Aug 27 14:14:46 2022 ------##
-84  ##------ Sat Aug 27 14:14:46 2022 ------##
-85  ##------ Sat Aug 27 14:14:46 2022 ------##
-86  ##------ Sat Aug 27 14:14:46 2022 ------##
-87  ##------ Sat Aug 27 14:14:46 2022 ------##
-88  ##------ Sat Aug 27 14:14:46 2022 ------##
-89  ##------ Sat Aug 27 14:14:46 2022 ------##
-90  ##------ Sat Aug 27 14:14:46 2022 ------##
-91  ##------ Sat Aug 27 14:14:46 2022 ------##
-92  ##------ Sat Aug 27 14:14:46 2022 ------##
-93  ##------ Sat Aug 27 14:14:46 2022 ------##
-94  ##------ Sat Aug 27 14:14:46 2022 ------##
-95  ##------ Sat Aug 27 14:14:46 2022 ------##
-96  ##------ Sat Aug 27 14:14:46 2022 ------##
-97  ##------ Sat Aug 27 14:14:46 2022 ------##
-98  ##------ Sat Aug 27 14:14:46 2022 ------##
-99  ##------ Sat Aug 27 14:14:46 2022 ------##
-100 ##------ Sat Aug 27 14:14:46 2022 ------##</code></pre>
+<pre><code>                              game current_players       date
+1 Counter-Strike: Global Offensive         733,019 2022-08-27
+2                           Dota 2         635,249 2022-08-27
+3                         Lost Ark         249,282 2022-08-27
+4                     Apex Legends         211,015 2022-08-27
+5              PUBG: BATTLEGROUNDS         176,811 2022-08-27
+6                        Destiny 2         153,858 2022-08-27</code></pre>
 </div>
 </div>
 

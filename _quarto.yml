@@ -27,7 +27,7 @@ website:
     background: primary
     search: true
     left:
-      - text: "Home"
+      - text: "Preface"
         file: index.qmd
       - collecting-data.qmd
       
