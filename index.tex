@@ -145,18 +145,30 @@
 \date{}
 
 \begin{document}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, breakable, enhanced, frame hidden, interior hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, breakable, sharp corners, boxrule=0pt, enhanced, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
-\hypertarget{preface}{%
-\chapter*{Preface}\label{preface}}
-\addcontentsline{toc}{chapter}{Preface}
+\hypertarget{about}{%
+\chapter*{About}\label{about}}
+\addcontentsline{toc}{chapter}{About}
 
-This is a Quarto cookbook for R created by Bradford Johnson.
+This is a cookbook for R created by Bradford Johnson. Use the navigation
+bar at the top to navigate through different pages.
+
+\hypertarget{my-links}{%
+\section{My Links}\label{my-links}}
+
+\href{https://github.com/bradfordjohnson}{\textbf{GitHub Profile Link}}
+
+\href{https://github.com/bradfordjohnson/r-cookbook}{\textbf{Project
+Repository Link}}
+
+\hypertarget{more-about-quarto}{%
+\section{More about Quarto}\label{more-about-quarto}}
+
+This Quarto book contains vignettes of R.
 
 To learn more about Quarto books visit
 \url{https://quarto.org/docs/books}.
-
-This Quarto book contains vignettes of R.
 
 
 

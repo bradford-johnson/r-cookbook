@@ -1,7 +1,15 @@
 # About {.unnumbered}
 
-This is a cookbook for R created by Bradford Johnson.
+This is a cookbook for R created by Bradford Johnson. Use the navigation bar at the top to navigate through different pages.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+## My Links
+
+[**GitHub Profile Link**](https://github.com/bradfordjohnson)
+
+[**Project Repository Link**](https://github.com/bradfordjohnson/r-cookbook)
+
+## More about Quarto
 
 This Quarto book contains vignettes of R.
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
