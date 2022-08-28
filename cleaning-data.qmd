@@ -26,7 +26,7 @@ clean_df <- read_csv('janitor-example.csv') %>%
   select(weekday, avg_temp_f, weather_condition)
 ```
 
-Here is how both the original data frame and cleaned look.
+Here is how the original data frame and cleaned data frame look. The column names are now easier to work with, and better understood.
 
 ```{r}
 # head()
