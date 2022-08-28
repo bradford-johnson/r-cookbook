@@ -36,3 +36,66 @@ dirty_df %>%
 clean_df %>%
   head()
 ```
+
+## Filter and Mutate Data
+
+Many times you may need to filter data, for example if you only want to see observations on a specific weekday, or with certain values. That is easy to do and with the `dplyr` package you will be able to really be creative with filtering, creating additional columns, and much more.
+
+For some of these examples I will use some data sets that come with R, the first data set we will look at is `chickwts` which looks at baby chick weights and feed types. I am going to summarize the counts for the feeds to quickly see all the options. Then I will filter some of the feeds as they are no longer available for my stakeholder in this scenario.
+
+```{r}
+# load packages and data 
+library(dplyr)
+
+chick_df <- chickwts
+
+# counts for each feed type
+chick_df %>%
+  group_by(feed) %>%
+  summarise(n = n())
+```
+
+```{r}
+# keep feeds: sunflower, soybean, linseed
+chick_feeds <- chick_df %>%
+  filter(feed == 'sunflower' | feed == 'soybean' | feed == 'linseed')
+
+# counts for each type of feed
+chick_feeds %>%
+  group_by(feed) %>%
+  summarise(n = n())
+```
+
+How about a different filter that returns all rows that have weights below 200 units, and are linseed or horsebean feeds.
+
+```{r}
+chick_df %>%
+  filter(weight < 200 & feed == 'linseed' | weight < 200 & feed == 'horsebean')
+```
+
+Now I am going to use the `mutate()` function to create a new column, and this column will be used to classify a chicks weight category based on some predetermined values.
+
+> For this example lets say these are the weight classes:
+>
+> > weight \< 200 - **underweight**
+> >
+> > weight \>= 200 & weight \<= 300 - **normal**
+> >
+> > weight \> 300 - **overweight**
+
+```{r}
+# mutate() and casewhen()
+chick_classes <- chick_df %>%
+  mutate(weight_class = case_when(
+    weight < 200 ~ 'underweight',
+    weight >= 200 & weight <= 300 ~ 'normal',
+    weight > 300 ~ 'overweight'
+    ))
+
+# view results
+chick_classes
+
+chick_classes %>% 
+  group_by(weight_class) %>%
+  summarise(n = n())
+```
