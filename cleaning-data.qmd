@@ -14,42 +14,25 @@ library(janitor)
 library(readr)
 library(dplyr)
 
-# read in csv
+# read in csv with no changes
 dirty_df <- read_csv('janitor-example.csv')
-```
 
-Below I will use the `head()` function to show you 6 rows of the data before cleaning them.
-
-(I exaggerated the column name formatting a bit)
-
-```{r}
-# pipe dirty_df into head to get only 6 rows
-dirty_df %>% 
-  head() 
-```
-
-Now I will show you how to clean up those column names with the `janitor` package and `clean_names()` function
-
-```{r}
-# pipe dirty_df into clean_names() and save result as clean_df
-clean_df <- dirty_df %>%
-  clean_names()
-
-# pipe clean_df into head() to get only 6 rows
-clean_df %>%
-  head()
-```
-
-Now that we have the spaces replaced with underscores, and the case all lower, now we can fix the `weather_condition` column and update the `temp_f` column because now we are told that is an average for the day. I will use the `mutate()` and `select()` functions from the `dplyr` package to create a new column that has the corrected names with the respective data, and drop the old ones.
-
-```{r}
-# mutate new weather_condition column and update avg_temp_f
-clean_df_2 <- clean_df %>%
+# read in csv but with janitor and dplyr functions
+clean_df <- read_csv('janitor-example.csv') %>%
+  clean_names() %>%
   mutate(weather_condition = w_ea_th_er_conditions) %>%
   mutate(avg_temp_f = temp_f) %>%
-  select(day_of_the_week, avg_temp_f, weather_condition)
+  mutate(weekday = day_of_the_week) %>%
+  select(weekday, avg_temp_f, weather_condition)
+```
 
-# pipe clean_df_2 into head() to get only 6 rows
-clean_df_2 %>%
-  head() 
+Here is how both the original data frame and cleaned look.
+
+```{r}
+# head()
+dirty_df %>% 
+  head()
+
+clean_df %>%
+  head()
 ```
