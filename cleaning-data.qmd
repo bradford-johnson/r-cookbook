@@ -6,7 +6,7 @@ There are countless ways to clean your data in R, and I will show you different 
 
 ## Column Names (Headers)
 
-However, first I think it is important to have clean and concise but descriptive headers, when dealing with tabular data. There have been many times where I load some data into R, and the headers are all uppercase, contain spaces, or something else that makes them annoying to work with. The `janitor` package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the `readr` package to import a hand crafted `.csv` that I made for this, the `dplyr` package so I can pipe the data into functions.
+However, first I think it is important to have clean and concise but descriptive headers, when dealing with tabular data. There have been many times where I load some data into R, and the headers are all uppercase, contain spaces, or something else that makes them annoying to work with. The `janitor` package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the `readr` package to import a hand crafted `.csv` that I made as an example. I will load in the `dplyr` package so I can pipe the data into functions.
 
 ```{r warning=FALSE,message=FALSE,error=FALSE}
 # load packages
