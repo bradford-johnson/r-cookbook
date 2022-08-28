@@ -1,12 +1,10 @@
 # Collecting Data
 
-The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip the "collecting data" stage.
+The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip collecting the data.
 
 But what if we wanted to gain different insights that require new data? Then we would need to collect new data. Depending on what I was doing I could add more data to the current data I have, or create a new set of data all together.
 
-## Web Scraping
-
-The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the `rvest` package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting).
+The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the `rvest` package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting and frustration).
 
 Below I will show a simple script using the `rvest`, `lubridate` and `tidyverse` packages that can scrape us some data from [Steam's](https://store.steampowered.com/stats/) game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live *Top games by current player count* table.
 

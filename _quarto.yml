@@ -9,7 +9,7 @@ book:
   chapters:
     - index.qmd
     - collecting-data.qmd
-    - cleaning-data.qmd
+    - summary.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -27,8 +27,7 @@ website:
     background: primary
     search: true
     left:
-      - text: "About"
+      - text: "Preface"
         file: index.qmd
       - collecting-data.qmd
-      - cleaning-data.qmd
       
