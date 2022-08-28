@@ -132,10 +132,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">Preface</a>
+    <a class="nav-link" href="./index.html">About</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./collecting-data.html" aria-current="page">Collecting Data</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cleaning-data.html">Cleaning Data</a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -155,9 +158,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="collecting-data" class="level1">
 <h1>Collecting Data</h1>
-<p>The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip collecting the data.</p>
+<p>The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip the “collecting data” stage.</p>
 <p>But what if we wanted to gain different insights that require new data? Then we would need to collect new data. Depending on what I was doing I could add more data to the current data I have, or create a new set of data all together.</p>
-<p>The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the <code>rvest</code> package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting and frustration).</p>
+<section id="web-scraping" class="level2">
+<h2 class="anchored" data-anchor-id="web-scraping">Web Scraping</h2>
+<p>The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the <code>rvest</code> package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting).</p>
 <p>Below I will show a simple script using the <code>rvest</code>, <code>lubridate</code> and <code>tidyverse</code> packages that can scrape us some data from <a href="https://store.steampowered.com/stats/">Steam’s</a> game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live <em>Top games by current player count</em> table.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
@@ -192,16 +197,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              game current_players       date
-1 Counter-Strike: Global Offensive         741,871 2022-08-27
-2                           Dota 2         628,794 2022-08-27
-3                         Lost Ark         248,959 2022-08-27
-4                     Apex Legends         200,782 2022-08-27
-5              PUBG: BATTLEGROUNDS         167,238 2022-08-27
-6                        Destiny 2         156,673 2022-08-27</code></pre>
+1 Counter-Strike: Global Offensive         492,130 2022-08-27
+2                           Dota 2         398,762 2022-08-27
+3                         Lost Ark         220,745 2022-08-27
+4                        Destiny 2         148,143 2022-08-27
+5                     Apex Legends         130,117 2022-08-27
+6                  Team Fortress 2          97,134 2022-08-27</code></pre>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
