@@ -49,7 +49,7 @@ clean_df_2 <- clean_df %>%
   mutate(avg_temp_f = temp_f) %>%
   select(day_of_the_week, avg_temp_f, weather_condition)
 
-# pipe clean_df into head() to get only 6 rows
+# pipe clean_df_2 into head() to get only 6 rows
 clean_df_2 %>%
   head() 
 ```
