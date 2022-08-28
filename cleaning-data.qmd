@@ -92,9 +92,11 @@ chick_classes <- chick_df %>%
     weight > 300 ~ 'overweight'
     ))
 
-# view results
-chick_classes
+# view top 6 and bottom 6 entries
+chick_classes %>% head()
+chick_classes %>% tail()
 
+# weight class count table 
 chick_classes %>% 
   group_by(weight_class) %>%
   summarise(n = n())

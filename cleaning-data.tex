@@ -185,7 +185,7 @@
 \date{}
 
 \begin{document}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, boxrule=0pt, enhanced, interior hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \hypertarget{cleaning-data}{%
 \chapter{Cleaning Data}\label{cleaning-data}}
@@ -212,8 +212,8 @@ uppercase, contain spaces, or something else that makes them annoying to
 work with. The \texttt{janitor} package is great because it can help
 clean up the headers (or column names) so they are easier to work with.
 I will load in the \texttt{readr} package to import a hand crafted
-\texttt{.csv} that I made for this, the \texttt{dplyr} package so I can
-pipe the data into functions.
+\texttt{.csv} that I made as an example. I will load in the
+\texttt{dplyr} package so I can pipe the data into functions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -235,7 +235,8 @@ pipe the data into functions.
 \end{Highlighting}
 \end{Shaded}
 
-Here is how both the original data frame and cleaned look.
+Here is how the original data frame and cleaned data frame look. The
+column names are now easier to work with, and better understood.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -274,6 +275,171 @@ Here is how both the original data frame and cleaned look.
 4 Thursday          85 sunny            
 5 Friday            83 sunny            
 6 Saturday          85 sunny            
+\end{verbatim}
+
+\hypertarget{filter-and-mutate-data}{%
+\section{Filter and Mutate Data}\label{filter-and-mutate-data}}
+
+Many times you may need to filter data, for example if you only want to
+see observations on a specific weekday, or with certain values. That is
+easy to do and with the \texttt{dplyr} package you will be able to
+really be creative with filtering, creating additional columns, and much
+more.
+
+For some of these examples I will use some data sets that come with R,
+the first data set we will look at is \texttt{chickwts} which looks at
+baby chick weights and feed types. I am going to summarize the counts
+for the feeds to quickly see all the options. Then I will filter some of
+the feeds as they are no longer available for my stakeholder in this
+scenario.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load packages and data }
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{chick\_df }\OtherTok{\textless{}{-}}\NormalTok{ chickwts}
+
+\CommentTok{\# counts for each feed type}
+\NormalTok{chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(feed) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 2
+  feed          n
+  <fct>     <int>
+1 casein       12
+2 horsebean    10
+3 linseed      12
+4 meatmeal     11
+5 soybean      14
+6 sunflower    12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# keep feeds: sunflower, soybean, linseed}
+\NormalTok{chick\_feeds }\OtherTok{\textless{}{-}}\NormalTok{ chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}sunflower\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}soybean\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}linseed\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# counts for each type of feed}
+\NormalTok{chick\_feeds }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(feed) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 2
+  feed          n
+  <fct>     <int>
+1 linseed      12
+2 soybean      14
+3 sunflower    12
+\end{verbatim}
+
+How about a different filter that returns all rows that have weights
+below 200 units, and are linseed or horsebean feeds.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}linseed\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}horsebean\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   weight      feed
+1     179 horsebean
+2     160 horsebean
+3     136 horsebean
+4     168 horsebean
+5     108 horsebean
+6     124 horsebean
+7     143 horsebean
+8     140 horsebean
+9     181   linseed
+10    141   linseed
+11    148   linseed
+12    169   linseed
+\end{verbatim}
+
+Now I am going to use the \texttt{mutate()} function to create a new
+column, and this column will be used to classify a chicks weight
+category based on some predetermined values.
+
+\begin{quote}
+For this example lets say these are the weight classes:
+
+\begin{quote}
+weight \textless{} 200 - \textbf{underweight}
+
+weight \textgreater= 200 \& weight \textless= 300 - \textbf{normal}
+
+weight \textgreater{} 300 - \textbf{overweight}
+\end{quote}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mutate() and casewhen()}
+\NormalTok{chick\_classes }\OtherTok{\textless{}{-}}\NormalTok{ chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{weight\_class =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}underweight\textquotesingle{}}\NormalTok{,}
+\NormalTok{    weight }\SpecialCharTok{\textgreater{}=} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ weight }\SpecialCharTok{\textless{}=} \DecValTok{300} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}normal\textquotesingle{}}\NormalTok{,}
+\NormalTok{    weight }\SpecialCharTok{\textgreater{}} \DecValTok{300} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}overweight\textquotesingle{}}
+\NormalTok{    ))}
+
+\CommentTok{\# view top 6 and bottom 6 entries}
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  weight      feed weight_class
+1    179 horsebean  underweight
+2    160 horsebean  underweight
+3    136 horsebean  underweight
+4    227 horsebean       normal
+5    217 horsebean       normal
+6    168 horsebean  underweight
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tail}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   weight   feed weight_class
+66    352 casein   overweight
+67    359 casein   overweight
+68    216 casein       normal
+69    222 casein       normal
+70    283 casein       normal
+71    332 casein   overweight
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# weight class count table }
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(weight\_class) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 2
+  weight_class     n
+  <chr>        <int>
+1 normal          28
+2 overweight      26
+3 underweight     17
 \end{verbatim}
 
 

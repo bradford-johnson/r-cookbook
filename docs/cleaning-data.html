@@ -293,85 +293,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&gt;</span> <span class="dv">300</span> <span class="sc">~</span> <span class="st">'overweight'</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    ))</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>chick_classes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># view top 6 and bottom 6 entries</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>chick_classes <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   weight      feed weight_class
-1     179 horsebean  underweight
-2     160 horsebean  underweight
-3     136 horsebean  underweight
-4     227 horsebean       normal
-5     217 horsebean       normal
-6     168 horsebean  underweight
-7     108 horsebean  underweight
-8     124 horsebean  underweight
-9     143 horsebean  underweight
-10    140 horsebean  underweight
-11    309   linseed   overweight
-12    229   linseed       normal
-13    181   linseed  underweight
-14    141   linseed  underweight
-15    260   linseed       normal
-16    203   linseed       normal
-17    148   linseed  underweight
-18    169   linseed  underweight
-19    213   linseed       normal
-20    257   linseed       normal
-21    244   linseed       normal
-22    271   linseed       normal
-23    243   soybean       normal
-24    230   soybean       normal
-25    248   soybean       normal
-26    327   soybean   overweight
-27    329   soybean   overweight
-28    250   soybean       normal
-29    193   soybean  underweight
-30    271   soybean       normal
-31    316   soybean   overweight
-32    267   soybean       normal
-33    199   soybean  underweight
-34    171   soybean  underweight
-35    158   soybean  underweight
-36    248   soybean       normal
-37    423 sunflower   overweight
-38    340 sunflower   overweight
-39    392 sunflower   overweight
-40    339 sunflower   overweight
-41    341 sunflower   overweight
-42    226 sunflower       normal
-43    320 sunflower   overweight
-44    295 sunflower       normal
-45    334 sunflower   overweight
-46    322 sunflower   overweight
-47    297 sunflower       normal
-48    318 sunflower   overweight
-49    325  meatmeal   overweight
-50    257  meatmeal       normal
-51    303  meatmeal   overweight
-52    315  meatmeal   overweight
-53    380  meatmeal   overweight
-54    153  meatmeal  underweight
-55    263  meatmeal       normal
-56    242  meatmeal       normal
-57    206  meatmeal       normal
-58    344  meatmeal   overweight
-59    258  meatmeal       normal
-60    368    casein   overweight
-61    390    casein   overweight
-62    379    casein   overweight
-63    260    casein       normal
-64    404    casein   overweight
-65    318    casein   overweight
-66    352    casein   overweight
-67    359    casein   overweight
-68    216    casein       normal
-69    222    casein       normal
-70    283    casein       normal
-71    332    casein   overweight</code></pre>
+<pre><code>  weight      feed weight_class
+1    179 horsebean  underweight
+2    160 horsebean  underweight
+3    136 horsebean  underweight
+4    227 horsebean       normal
+5    217 horsebean       normal
+6    168 horsebean  underweight</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>chick_classes <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weight_class) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>chick_classes <span class="sc">%&gt;%</span> <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   weight   feed weight_class
+66    352 casein   overweight
+67    359 casein   overweight
+68    216 casein       normal
+69    222 casein       normal
+70    283 casein       normal
+71    332 casein   overweight</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># weight class count table </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>chick_classes <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weight_class) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 x 2
   weight_class     n
