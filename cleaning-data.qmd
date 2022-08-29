@@ -1,6 +1,6 @@
 # Cleaning Data
 
-Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders as your analysis can only be as strong as your data is clean. So very clean and structured data may lead you to entirely different insights than if you where to not clean it at all.
+Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders, as your analysis can only be as strong as your data is clean. So very clean and structured data may lead you to entirely different insights than if you where to not clean it at all.
 
 There are countless ways to clean your data in R, and I will show you different ways I have cleaned up data sets.
 
