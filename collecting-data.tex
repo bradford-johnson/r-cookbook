@@ -185,7 +185,7 @@
 \date{}
 
 \begin{document}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden, breakable]}{\end{tcolorbox}}\fi
 
 \hypertarget{collecting-data}{%
 \chapter{Collecting Data}\label{collecting-data}}
@@ -194,19 +194,22 @@ The first step to any data analytics project is collecting data. This
 step may not be always necessary as in many cases the data has already
 been collected. For example in my current role we get daily analytics
 emails each morning that contain the data from the previous day. So if
-this data is relevant and all we need for our analysis we can skip
-collecting the data.
+this data is relevant and all we need for our analysis we can skip the
+``collecting data'' stage.
 
 But what if we wanted to gain different insights that require new data?
 Then we would need to collect new data. Depending on what I was doing I
 could add more data to the current data I have, or create a new set of
 data all together.
 
+\hypertarget{web-scraping}{%
+\section{Web Scraping}\label{web-scraping}}
+
 The way we collect data varies from using a pencil and notepad, to an
 automated process that saves every entry in the cloud. One way I have
 used R to collect data is by web scraping. Using the \texttt{rvest}
 package can allow you to collect data from the internet with minimal
-effort (avoid the constant copy/pasting and frustration).
+effort (avoid the constant copy/pasting).
 
 Below I will show a simple script using the \texttt{rvest},
 \texttt{lubridate} and \texttt{tidyverse} packages that can scrape us
@@ -256,12 +259,12 @@ Now lets see the first 6 rows of our new data frame.
 
 \begin{verbatim}
                               game current_players       date
-1 Counter-Strike: Global Offensive         741,871 2022-08-27
-2                           Dota 2         628,794 2022-08-27
-3                         Lost Ark         248,959 2022-08-27
-4                     Apex Legends         200,782 2022-08-27
-5              PUBG: BATTLEGROUNDS         167,238 2022-08-27
-6                        Destiny 2         156,673 2022-08-27
+1 Counter-Strike: Global Offensive         501,868 2022-08-29
+2                           Dota 2         383,445 2022-08-29
+3                         Lost Ark         161,746 2022-08-29
+4                        Destiny 2         122,834 2022-08-29
+5                     Apex Legends         119,886 2022-08-29
+6                  Team Fortress 2          96,044 2022-08-29
 \end{verbatim}
 
 
