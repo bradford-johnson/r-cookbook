@@ -1,6 +1,8 @@
 # About {.unnumbered}
 
-This is a cookbook for R created by Bradford Johnson. Use the navigation bar at the top to navigate through different pages.
+This is a cookbook for R created by Bradford Johnson. You can use the menu on the left the navigate the different chapters and the Table of contents on the right to see different sections for the current page you are on.
+
+This Quarto book contains vignettes of R code, and this book is not meant to be a full step by step process for everything you need to know in order to analyze data in R.
 
 ## My Links
 
@@ -9,7 +11,5 @@ This is a cookbook for R created by Bradford Johnson. Use the navigation bar at 
 [**Project Repository Link**](https://github.com/bradfordjohnson/r-cookbook)
 
 ## More about Quarto
-
-This Quarto book contains vignettes of R.
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.

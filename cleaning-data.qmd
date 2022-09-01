@@ -101,3 +101,11 @@ chick_classes %>%
   group_by(weight_class) %>%
   summarise(n = n())
 ```
+
+## Removing Outliers 
+
+There are different types of methods that you can use to identify and remove outliers. The method I will show is
+
+```{r}
+# removing outliers
+```
