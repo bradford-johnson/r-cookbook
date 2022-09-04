@@ -34,9 +34,9 @@ for(i in 1:n){
 }
 
 
-sample_means <- data.frame(sample_means)
+sample_means_df <- data.frame(sample_means)
  
-sample_means %>%
+sample_means_df %>%
    ggplot(aes(sample_means)) + 
    geom_density(size = .5) +
    labs(title = "Density Curve", x = "Sample Means", y = "Density") + 
@@ -117,7 +117,7 @@ samples_df %>%
 Using a histogram is another common way to show a distribution. It may look like a "bar char" with many bars, however each "bar" is a bin, and it represents a range of numbers that falls within it's respective bin. The height of the "bar" shows a count of how many values fall within a bin.
 
 ```{r}
-sample_means %>%
+sample_means_df %>%
   ggplot(aes(x = sample_means)) +
   geom_histogram(bins = 30) +
   labs(title = "Histogram", y = "Count", x = "Sample Means")

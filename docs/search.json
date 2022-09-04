@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "visualizing-data.html",
+    "href": "visualizing-data.html",
+    "title": "3  Visualizing Data",
+    "section": "",
+    "text": "There are many ways you can visualize data, and selecting a way to visualize your data depends on what kind of data you have. For example, if you have geographic data, then using a map can be an option. The visual you pick also should be effective at telling the story for your stakeholders.\nFor the different visualizations, I will group them based on what they show:"
+  },
+  {
+    "objectID": "visualizing-data.html#distribution",
+    "href": "visualizing-data.html#distribution",
+    "title": "3  Visualizing Data",
+    "section": "3.1 Distribution",
+    "text": "3.1 Distribution\nFor this group the visuals all show the audience information about a distribution.\n\n3.1.1 Density Plot\nHere is a good resource that goes more in depth on density plots.\n\nlibrary(tidyverse)\n\nset.seed(0)\n\nn = 10000\n\nsample_means = rep(NA, n)\n\nfor(i in 1:n){\n  sample_means[i] = mean(rnorm(20, mean=0, sd=2))\n}\n\n\nsample_means_df <- data.frame(sample_means)\n \nsample_means_df %>%\n   ggplot(aes(sample_means)) + \n   geom_density(size = .5) +\n   labs(title = \"Density Curve\", x = \"Sample Means\", y = \"Density\") + \n   theme_classic()\n\n\n\n\n\n\n3.1.2 Density Ridges\nUsing the ggridges package you can compare and see distributions together. Click here for the package documentation.\n\nsamples_df %>%\n  ggplot(aes(x = sample_means, y = sample_n, fill = sample_n)) +\n  geom_density_ridges(alpha = .7) + \n  labs(title = \"Density Ridges Plot\", x =\"Sample Means\", y = \"Sample ID\") +\n  theme_classic()\n\nPicking joint bandwidth of 0.0637\n\n\n\n\n\n\n\n3.1.3 Histogram\nUsing a histogram is another common way to show a distribution. It may look like a “bar char” with many bars, however each “bar” is a bin, and it represents a range of numbers that falls within it’s respective bin. The height of the “bar” shows a count of how many values fall within a bin.\n\nsample_means_df %>%\n  ggplot(aes(x = sample_means)) +\n  geom_histogram(bins = 30) +\n  labs(title = \"Histogram\", y = \"Count\", x = \"Sample Means\")"
+  }
+]
