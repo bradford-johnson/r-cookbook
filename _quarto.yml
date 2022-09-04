@@ -10,7 +10,7 @@ book:
     - index.qmd
     - collecting-data.qmd
     - cleaning-data.qmd
-    - references.qmd
+    - visualizing-data.qmd
 
 bibliography: references.bib
 
@@ -31,4 +31,5 @@ website:
         file: index.qmd
       - collecting-data.qmd
       - cleaning-data.qmd
+      - visualizing-data.qmd
       

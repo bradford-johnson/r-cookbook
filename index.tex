@@ -38,7 +38,7 @@
 \makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -49,6 +49,46 @@
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -79,6 +119,7 @@
 \makeatletter
 \makeatother
 \makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -134,6 +175,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
+  pdftitle={R-Cookbook},
+  pdfauthor={Bradford Johnson},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -141,21 +184,38 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\author{}
-\date{}
+\title{R-Cookbook}
+\author{Bradford Johnson}
+\date{8/27/2022}
 
 \begin{document}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, breakable, enhanced, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
 
 \hypertarget{about}{%
 \chapter*{About}\label{about}}
 \addcontentsline{toc}{chapter}{About}
 
-This is a cookbook for R created by Bradford Johnson. Use the navigation
-bar at the top to navigate through different pages.
+This is a cookbook for R created by Bradford Johnson. You can use the
+menu on the left the navigate the different chapters and the Table of
+contents on the right to see different sections for the current page you
+are on.
+
+This Quarto book contains vignettes of R code, and this book is not
+meant to be a full step by step process for everything you need to know
+in order to analyze data in R.
 
 \hypertarget{my-links}{%
-\section{My Links}\label{my-links}}
+\section*{My Links}\label{my-links}}
+\addcontentsline{toc}{section}{My Links}
 
 \href{https://github.com/bradfordjohnson}{\textbf{GitHub Profile Link}}
 
@@ -163,12 +223,392 @@ bar at the top to navigate through different pages.
 Repository Link}}
 
 \hypertarget{more-about-quarto}{%
-\section{More about Quarto}\label{more-about-quarto}}
-
-This Quarto book contains vignettes of R.
+\section*{More about Quarto}\label{more-about-quarto}}
+\addcontentsline{toc}{section}{More about Quarto}
 
 To learn more about Quarto books visit
 \url{https://quarto.org/docs/books}.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{collecting-data}{%
+\chapter{Collecting Data}\label{collecting-data}}
+
+The first step to any data analytics project is collecting data. This
+step may not be always necessary as in many cases the data has already
+been collected. For example in my current role we get daily analytics
+emails each morning that contain the data from the previous day. So if
+this data is relevant and all we need for our analysis we can skip the
+``collecting data'' stage.
+
+But what if we wanted to gain different insights that require new data?
+Then we would need to collect new data. Depending on what I was doing I
+could add more data to the current data I have, or create a new set of
+data all together.
+
+\hypertarget{web-scraping}{%
+\section{Web Scraping}\label{web-scraping}}
+
+The way we collect data varies from using a pencil and notepad, to an
+automated process that saves every entry in the cloud. One way I have
+used R to collect data is by web scraping. Using the \texttt{rvest}
+package can allow you to collect data from the internet with minimal
+effort (avoid the constant copy/pasting).
+
+Below I will show a simple script using the \texttt{rvest},
+\texttt{lubridate} and \texttt{tidyverse} packages that can scrape us
+some data from \href{https://store.steampowered.com/stats/}{Steam's}
+game stats page. Steam is a video game distribution service, and we will
+scrape a couple columns from their live \emph{Top games by current
+player count} table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load packages}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(rvest)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{\# link to get data from}
+\NormalTok{link }\OtherTok{=} \StringTok{"https://store.steampowered.com/stats/"} 
+
+\CommentTok{\# read webpage at the above link}
+\NormalTok{page }\OtherTok{=} \FunctionTok{read\_html}\NormalTok{(link) }
+
+\CommentTok{\# scrape top 100 games by current players}
+\NormalTok{game }\OtherTok{=}\NormalTok{ page }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{".gameLink"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_text}\NormalTok{()  }
+
+\CommentTok{\# scrape number of players for each game }
+\NormalTok{current\_players }\OtherTok{=}\NormalTok{ page }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"td:nth{-}child(1) .currentServers"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_text}\NormalTok{() }
+
+\CommentTok{\# put both game and player data into a data frame}
+\NormalTok{df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(game, current\_players) }
+
+\CommentTok{\# get current date}
+\NormalTok{current\_date }\OtherTok{\textless{}{-}} \FunctionTok{as\_datetime}\NormalTok{(}\FunctionTok{Sys.Date}\NormalTok{())}
+
+\CommentTok{\# update data frame with mutated column that adds current\_date}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =}\NormalTok{ current\_date)}
+\end{Highlighting}
+\end{Shaded}
+
+Now lets see the first 6 rows of our new data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                              game current_players       date
+1 Counter-Strike: Global Offensive         479,208 2022-09-04
+2                           Dota 2         453,373 2022-09-04
+3                         Lost Ark         152,280 2022-09-04
+4                     Apex Legends         126,172 2022-09-04
+5                        Destiny 2         124,690 2022-09-04
+6                  Team Fortress 2         110,364 2022-09-04
+\end{verbatim}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{cleaning-data}{%
+\chapter{Cleaning Data}\label{cleaning-data}}
+
+Cleaning data is one of the most important steps to any data analytics
+project. Cleaning data can involve anything from changing the case of
+characters from uppercase to lowercase to removing outliers from a data
+set, or even figuring out what to do with missing values. Having clean
+data is essential for making recommendations to stakeholders, as your
+analysis can only be as strong as your data is clean. So very clean and
+structured data may lead you to entirely different insights than if you
+where to not clean it at all.
+
+There are countless ways to clean your data in R, and I will show you
+different ways I have cleaned up data sets.
+
+\hypertarget{column-names-headers}{%
+\section{Column Names (Headers)}\label{column-names-headers}}
+
+However, first I think it is important to have clean and concise but
+descriptive headers, when dealing with tabular data. There have been
+many times where I load some data into R, and the headers are all
+uppercase, contain spaces, or something else that makes them annoying to
+work with. The \texttt{janitor} package is great because it can help
+clean up the headers (or column names) so they are easier to work with.
+I will load in the \texttt{readr} package to import a hand crafted
+\texttt{.csv} that I made as an example. I will load in the
+\texttt{dplyr} package so I can pipe the data into functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load packages}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# read in csv with no changes}
+\NormalTok{dirty\_df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{\textquotesingle{}janitor{-}example.csv\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# read in csv but with janitor and dplyr functions}
+\NormalTok{clean\_df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{\textquotesingle{}janitor{-}example.csv\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{clean\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{weather\_condition =}\NormalTok{ w\_ea\_th\_er\_conditions) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg\_temp\_f =}\NormalTok{ temp\_f) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{weekday =}\NormalTok{ day\_of\_the\_week) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(weekday, avg\_temp\_f, weather\_condition)}
+\end{Highlighting}
+\end{Shaded}
+
+Here is how the original data frame and cleaned data frame look. The
+column names are now easier to work with, and better understood.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# head()}
+\NormalTok{dirty\_df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 3
+  `DAY OF THE WEEK` `TEMP F` `WEaThEr CONDITIONS`
+  <chr>                <dbl> <chr>               
+1 Monday                  98 sunny               
+2 Tuesday                 95 sunny               
+3 Wednesday               70 cloudy              
+4 Thursday                85 sunny               
+5 Friday                  83 sunny               
+6 Saturday                85 sunny               
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 3
+  weekday   avg_temp_f weather_condition
+  <chr>          <dbl> <chr>            
+1 Monday            98 sunny            
+2 Tuesday           95 sunny            
+3 Wednesday         70 cloudy           
+4 Thursday          85 sunny            
+5 Friday            83 sunny            
+6 Saturday          85 sunny            
+\end{verbatim}
+
+\hypertarget{filter-and-mutate-data}{%
+\section{Filter and Mutate Data}\label{filter-and-mutate-data}}
+
+Many times you may need to filter data, for example if you only want to
+see observations on a specific weekday, or with certain values. That is
+easy to do and with the \texttt{dplyr} package you will be able to
+really be creative with filtering, creating additional columns, and much
+more.
+
+For some of these examples I will use some data sets that come with R,
+the first data set we will look at is \texttt{chickwts} which looks at
+baby chick weights and feed types. I am going to summarize the counts
+for the feeds to quickly see all the options. Then I will filter some of
+the feeds as they are no longer available for my stakeholder in this
+scenario.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load packages and data }
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{chick\_df }\OtherTok{\textless{}{-}}\NormalTok{ chickwts}
+
+\CommentTok{\# counts for each feed type}
+\NormalTok{chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(feed) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 2
+  feed          n
+  <fct>     <int>
+1 casein       12
+2 horsebean    10
+3 linseed      12
+4 meatmeal     11
+5 soybean      14
+6 sunflower    12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# keep feeds: sunflower, soybean, linseed}
+\NormalTok{chick\_feeds }\OtherTok{\textless{}{-}}\NormalTok{ chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}sunflower\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}soybean\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}linseed\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# counts for each type of feed}
+\NormalTok{chick\_feeds }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(feed) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 2
+  feed          n
+  <fct>     <int>
+1 linseed      12
+2 soybean      14
+3 sunflower    12
+\end{verbatim}
+
+How about a different filter that returns all rows that have weights
+below 200 units, and are linseed or horsebean feeds.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}linseed\textquotesingle{}} \SpecialCharTok{|}\NormalTok{ weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ feed }\SpecialCharTok{==} \StringTok{\textquotesingle{}horsebean\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   weight      feed
+1     179 horsebean
+2     160 horsebean
+3     136 horsebean
+4     168 horsebean
+5     108 horsebean
+6     124 horsebean
+7     143 horsebean
+8     140 horsebean
+9     181   linseed
+10    141   linseed
+11    148   linseed
+12    169   linseed
+\end{verbatim}
+
+Now I am going to use the \texttt{mutate()} function to create a new
+column, and this column will be used to classify a chicks weight
+category based on some predetermined values.
+
+\begin{quote}
+For this example lets say these are the weight classes:
+
+\begin{quote}
+weight \textless{} 200 - \textbf{underweight}
+
+weight \textgreater= 200 \& weight \textless= 300 - \textbf{normal}
+
+weight \textgreater{} 300 - \textbf{overweight}
+\end{quote}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mutate() and casewhen()}
+\NormalTok{chick\_classes }\OtherTok{\textless{}{-}}\NormalTok{ chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{weight\_class =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    weight }\SpecialCharTok{\textless{}} \DecValTok{200} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}underweight\textquotesingle{}}\NormalTok{,}
+\NormalTok{    weight }\SpecialCharTok{\textgreater{}=} \DecValTok{200} \SpecialCharTok{\&}\NormalTok{ weight }\SpecialCharTok{\textless{}=} \DecValTok{300} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}normal\textquotesingle{}}\NormalTok{,}
+\NormalTok{    weight }\SpecialCharTok{\textgreater{}} \DecValTok{300} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}overweight\textquotesingle{}}
+\NormalTok{    ))}
+
+\CommentTok{\# view top 6 and bottom 6 entries}
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  weight      feed weight_class
+1    179 horsebean  underweight
+2    160 horsebean  underweight
+3    136 horsebean  underweight
+4    227 horsebean       normal
+5    217 horsebean       normal
+6    168 horsebean  underweight
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tail}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   weight   feed weight_class
+66    352 casein   overweight
+67    359 casein   overweight
+68    216 casein       normal
+69    222 casein       normal
+70    283 casein       normal
+71    332 casein   overweight
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# weight class count table }
+\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(weight\_class) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 2
+  weight_class     n
+  <chr>        <int>
+1 normal          28
+2 overweight      26
+3 underweight     17
+\end{verbatim}
+
+\hypertarget{removing-outliers}{%
+\section{Removing Outliers}\label{removing-outliers}}
+
+There are different types of methods that you can use to identify and
+remove outliers. The method I will show is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# removing outliers}
+\end{Highlighting}
+\end{Shaded}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{visualizing-data}{%
+\chapter{Visualizing Data}\label{visualizing-data}}
+
+There are many ways you can visualize data, and selecting a way to
+visualize your data depends on what kind of data you have. For example,
+if you have geographic data, then using a map can be an option. The
+visual you pick also should be effective at telling the story for your
+stakeholders.
+
+For the different visualizations, I will group them based on what they
+show:
+
+\begin{quote}
+\begin{itemize}
+\item
+  \textbf{Distribution}
+\item
+  \textbf{Comparison}
+\item
+  \textbf{Relationship}
+\item
+  \textbf{Composition}
+\end{itemize}
+\end{quote}
+
+\hypertarget{distribution}{%
+\section{Distribution}\label{distribution}}
 
 
 
