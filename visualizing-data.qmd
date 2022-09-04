@@ -39,7 +39,7 @@ sample_means_df <- data.frame(sample_means)
 sample_means_df %>%
    ggplot(aes(sample_means)) + 
    geom_density(size = .5) +
-   labs(title = "Density Curve", x = "Sample Means", y = "Density") + 
+   labs(title = "Density Plot", x = "Sample Means", y = "Density") + 
    theme_classic()
   
 ```
