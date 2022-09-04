@@ -66,7 +66,7 @@ n2 = 10000
 sample_means = rep(NA, n)
 
 for(i in 1:n){
-  sample_means[i] = mean(rnorm(20, mean=0.5, sd=2))
+  sample_means[i] = mean(rnorm(20, mean=0.5, sd=1.4))
 }
 
 sample_means2 <- data.frame(sample_means)
@@ -79,7 +79,7 @@ n = 10000
 sample_means = rep(NA, n)
 
 for(i in 1:n){
-  sample_means[i] = mean(rnorm(20, mean=-0.5, sd=2))
+  sample_means[i] = mean(rnorm(20, mean=-0.5, sd=1))
 }
 
 sample_means3 <- data.frame(sample_means) 
@@ -121,4 +121,28 @@ sample_means_df %>%
   ggplot(aes(x = sample_means)) +
   geom_histogram(bins = 30) +
   labs(title = "Histogram", y = "Count", x = "Sample Means")
+```
+
+### Boxplot
+
+Boxplots can be a useful way to show a distribution, but the distribution is hidden behind each box meaning it could be misinterpreted.
+
+```{r}
+samples_df %>%
+  ggplot(aes(x = sample_n, y = sample_means, fill = sample_n)) +
+  geom_boxplot() +
+  labs(title = "Boxplot") +
+  theme_classic()
+```
+
+### Violin Chart
+
+Similar to a boxplot but shows the shape of a distribution better.
+
+```{r}
+samples_df %>%
+  ggplot(aes(x = sample_n, y = sample_means, fill = sample_n)) +
+  geom_violin() +
+  labs(title = "Violin Chart") +
+  theme_classic()
 ```
