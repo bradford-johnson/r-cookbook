@@ -120,7 +120,8 @@ Using a histogram is another common way to show a distribution. It may look like
 sample_means_df %>%
   ggplot(aes(x = sample_means)) +
   geom_histogram(bins = 30) +
-  labs(title = "Histogram", y = "Count", x = "Sample Means")
+  labs(title = "Histogram", y = "Count", x = "Sample Means") +
+  theme_classic()
 ```
 
 ### Boxplot
