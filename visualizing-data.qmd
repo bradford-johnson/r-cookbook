@@ -13,3 +13,112 @@ For the different visualizations, I will group them based on what they show:
 > -   **Composition**
 
 ## Distribution
+
+For this group the visuals all show the audience information about a distribution.
+
+### Density Plot
+
+[Here](https://www.data-to-viz.com/graph/density.html) is a good resource that goes more in depth on density plots.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+
+set.seed(0)
+
+n = 10000
+
+sample_means = rep(NA, n)
+
+for(i in 1:n){
+  sample_means[i] = mean(rnorm(20, mean=0, sd=2))
+}
+
+
+sample_means <- data.frame(sample_means)
+ 
+sample_means %>%
+   ggplot(aes(sample_means)) + 
+   geom_density(size = .5) +
+   labs(title = "Density Curve", x = "Sample Means", y = "Density") + 
+   theme_classic()
+  
+```
+
+```{r include=FALSE}
+library(ggridges)
+# create column one for df
+set.seed(1)
+
+n1 = 10000
+
+sample_means = rep(NA, n)
+
+for(i in 1:n){
+  sample_means[i] = mean(rnorm(20, mean=0, sd=2))
+}
+
+sample_means1 <- data.frame(sample_means)
+# create column two for df
+set.seed(2)
+
+n2 = 10000
+
+sample_means = rep(NA, n)
+
+for(i in 1:n){
+  sample_means[i] = mean(rnorm(20, mean=0.5, sd=2))
+}
+
+sample_means2 <- data.frame(sample_means)
+
+# create column three for df
+set.seed(3)
+
+n = 10000
+
+sample_means = rep(NA, n)
+
+for(i in 1:n){
+  sample_means[i] = mean(rnorm(20, mean=-0.5, sd=2))
+}
+
+sample_means3 <- data.frame(sample_means) 
+
+# prepare all 3 dfs to be combined into one
+
+sample_means1 <- sample_means1 %>%
+  mutate(sample_n = "S1")
+
+sample_means2 <- sample_means2 %>%
+  mutate(sample_n = "S2")
+
+sample_means3 <- sample_means3 %>%
+  mutate(sample_n = "S3")
+
+samples_df <- sample_means1 %>%
+  bind_rows(sample_means2) %>%
+  bind_rows(sample_means3)
+```
+
+### Density Ridges
+
+Using the `ggridges` package you can compare and see distributions together. [Click here](https://rdocumentation.org/packages/ggridges/versions/0.5.3) for the package documentation.
+
+```{r}
+samples_df %>%
+  ggplot(aes(x = sample_means, y = sample_n, fill = sample_n)) +
+  geom_density_ridges(alpha = .7) + 
+  labs(title = "Density Ridges Plot", x ="Sample Means", y = "Sample ID") +
+  theme_classic()
+```
+
+### Histogram
+
+Using a histogram is another common way to show a distribution. It may look like a "bar char" with many bars, however each "bar" is a bin, and it represents a range of numbers that falls within it's respective bin. The height of the "bar" shows a count of how many values fall within a bin.
+
+```{r}
+sample_means %>%
+  ggplot(aes(x = sample_means)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Histogram", y = "Count", x = "Sample Means")
+```
