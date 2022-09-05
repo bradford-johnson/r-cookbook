@@ -190,7 +190,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, breakable, enhanced, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, breakable, interior hidden, sharp corners, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -303,12 +303,12 @@ Now lets see the first 6 rows of our new data frame.
 
 \begin{verbatim}
                               game current_players       date
-1 Counter-Strike: Global Offensive         479,208 2022-09-04
-2                           Dota 2         453,373 2022-09-04
-3                         Lost Ark         152,280 2022-09-04
-4                     Apex Legends         126,172 2022-09-04
-5                        Destiny 2         124,690 2022-09-04
-6                  Team Fortress 2         110,364 2022-09-04
+1 Counter-Strike: Global Offensive         518,347 2022-09-05
+2                           Dota 2         467,102 2022-09-05
+3                         Lost Ark         164,095 2022-09-05
+4                     Apex Legends         142,374 2022-09-05
+5                        Destiny 2         138,539 2022-09-05
+6                             Rust         105,183 2022-09-05
 \end{verbatim}
 
 \bookmarksetup{startatroot}
@@ -582,6 +582,14 @@ remove outliers. The method I will show is
 
 \bookmarksetup{startatroot}
 
+\hypertarget{analyzing-data}{%
+\chapter{Analyzing Data}\label{analyzing-data}}
+
+Once your data is cleaned up then it is ready to investigate the data in
+order to find insights\ldots{}
+
+\bookmarksetup{startatroot}
+
 \hypertarget{visualizing-data}{%
 \chapter{Visualizing Data}\label{visualizing-data}}
 
@@ -607,8 +615,259 @@ show:
 \end{itemize}
 \end{quote}
 
-\hypertarget{distribution}{%
-\section{Distribution}\label{distribution}}
+\hypertarget{distributions}{%
+\section{Distributions}\label{distributions}}
+
+For this group the visuals all show the audience information about a
+distribution.
+
+\hypertarget{density-plot}{%
+\subsection{Density Plot}\label{density-plot}}
+
+\href{https://www.data-to-viz.com/graph/density.html}{Here} is a good
+resource that goes more in depth on density plots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load in tidyverse package}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{\# create some random data}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{n }\OtherTok{=} \DecValTok{10000}
+
+\NormalTok{sample\_means }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+\NormalTok{  sample\_means[i] }\OtherTok{=} \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{, }\AttributeTok{mean=}\DecValTok{0}\NormalTok{, }\AttributeTok{sd=}\DecValTok{2}\NormalTok{))}
+\NormalTok{\}}
+
+\CommentTok{\# save this data into a data frame }
+\NormalTok{sample\_means\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(sample\_means)}
+
+\CommentTok{\# create density plot }
+\NormalTok{sample\_means\_df }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(sample\_means)) }\SpecialCharTok{+} 
+   \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Density Plot"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Sample Means"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Density"}\NormalTok{) }\SpecialCharTok{+} 
+   \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-1-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{density-ridges}{%
+\subsection{Density Ridges}\label{density-ridges}}
+
+Using the \texttt{ggridges} package you can compare and see
+distributions together.
+\href{https://rdocumentation.org/packages/ggridges/versions/0.5.3}{Click
+here} for the package documentation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create density ridges with 3 randomly sampled distributions }
+\NormalTok{samples\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sample\_means, }\AttributeTok{y =}\NormalTok{ sample\_n, }\AttributeTok{fill =}\NormalTok{ sample\_n)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{7}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Density Ridges Plot"}\NormalTok{, }\AttributeTok{x =}\StringTok{"Sample Means"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Sample ID"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Picking joint bandwidth of 0.0467
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{histogram}{%
+\subsection{Histogram}\label{histogram}}
+
+Using a histogram is another common way to show a distribution. It may
+look like a ``bar char'' with many bars, however each ``bar'' is a bin,
+and it represents a range of numbers that falls within it's respective
+bin. The height of the ``bar'' shows a count of how many values fall
+within a bin.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create histogram with random data }
+\NormalTok{sample\_means\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sample\_means)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Histogram"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Sample Means"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{boxplot}{%
+\subsection{Boxplot}\label{boxplot}}
+
+Boxplots can be a useful way to show a distribution, but the
+distribution is hidden behind each box meaning it could be
+misinterpreted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create boxplots with random data}
+\NormalTok{samples\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sample\_n, }\AttributeTok{y =}\NormalTok{ sample\_means, }\AttributeTok{fill =}\NormalTok{ sample\_n)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Boxplot"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{violin-chart}{%
+\subsection{Violin Chart}\label{violin-chart}}
+
+Similar to a boxplot but shows the shape of a distribution better.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create violin charts with random data}
+\NormalTok{samples\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sample\_n, }\AttributeTok{y =}\NormalTok{ sample\_means, }\AttributeTok{fill =}\NormalTok{ sample\_n)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Violin Chart"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{comparisons}{%
+\section{Comparisons}\label{comparisons}}
+
+For this group the visuals compare insights for the audience.
+
+\hypertarget{bar-chart}{%
+\subsection{Bar Chart}\label{bar-chart}}
+
+Bar charts are very simple and effective at conveying information, never
+underestimate the power of a bar chart.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# read in iris dataset }
+\NormalTok{iris\_df }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{clean\_names}\NormalTok{()}
+
+\CommentTok{\# group the data by species, then summarize the avg petal width for each species}
+\NormalTok{iris\_df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{avg\_petal\_width =} \FunctionTok{mean}\NormalTok{(petal\_width)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species, }\AttributeTok{y =}\NormalTok{ avg\_petal\_width, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Bar Chart"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Avg Petal Width"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Species"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{horizontal-bar-chart}{%
+\subsection{Horizontal Bar Chart}\label{horizontal-bar-chart}}
+
+Similar to a bar chart, but a horizontal version, can be useful but when
+viewing, stakeholders can more easily distinguish a difference in the
+vertical counterpart than in the horizontal bar chart. This is the same
+bar chart as above, created with \texttt{+\ geom\_col()} but to rotate
+the plot I used the \texttt{+\ coord\_flip()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create horizontal bar chart}
+\NormalTok{iris\_df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{avg\_petal\_width =} \FunctionTok{mean}\NormalTok{(petal\_width)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species, }\AttributeTok{y =}\NormalTok{ avg\_petal\_width, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Horizontal Bar Chart"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Avg Petal Width"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Species"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-9-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{line-chart}{%
+\subsection{Line Chart}\label{line-chart}}
+
+Line charts are essential when working time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# read in chickweight dataset}
+\NormalTok{chick\_df }\OtherTok{\textless{}{-}}\NormalTok{ ChickWeight }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{clean\_names}\NormalTok{()}
+
+\CommentTok{\# filter and group by chick 1, 21, 45}
+\NormalTok{chick\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(chick }\SpecialCharTok{==} \DecValTok{1}\SpecialCharTok{|}\NormalTok{chick }\SpecialCharTok{==} \DecValTok{21}\SpecialCharTok{|}\NormalTok{chick }\SpecialCharTok{==} \DecValTok{45}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(chick) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time, }\AttributeTok{y =}\NormalTok{ weight, }\AttributeTok{color =}\NormalTok{ diet)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size =}\NormalTok{ .}\DecValTok{8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Line Chart"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Time"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Chicken Weight"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./visualizing-data_files/figure-pdf/unnamed-chunk-10-1.pdf}
+
+}
+
+\end{figure}
 
 
 
