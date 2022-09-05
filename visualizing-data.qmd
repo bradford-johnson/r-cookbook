@@ -12,7 +12,7 @@ For the different visualizations, I will group them based on what they show:
 >
 > -   **Composition**
 
-## Distribution
+## Distributions
 
 For this group the visuals all show the audience information about a distribution.
 
@@ -146,4 +146,12 @@ samples_df %>%
   geom_violin() +
   labs(title = "Violin Chart") +
   theme_classic()
+```
+
+## Comparisons
+
+For this group the visuals compare insights for the audience.
+
+```{r}
+
 ```
