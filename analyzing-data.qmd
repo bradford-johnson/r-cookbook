@@ -1,0 +1,3 @@
+# Analyzing Data
+
+Once your data is cleaned up then it is ready to investigate the data in order to find insights...

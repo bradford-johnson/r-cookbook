@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R-Cookbook - 3&nbsp; Visualizing Data</title>
+<title>R-Cookbook - 4&nbsp; Visualizing Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cleaning-data.html" rel="prev">
+<link href="./analyzing-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualizing Data</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visualizing Data</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -167,7 +167,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualizing Data</span></a>
+  <a href="./analyzing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analyzing Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visualizing Data</span></a>
   </div>
 </li>
     </ul>
@@ -179,19 +184,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#distributions" id="toc-distributions" class="nav-link active" data-scroll-target="#distributions"> <span class="header-section-number">3.1</span> Distributions</a>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link active" data-scroll-target="#distributions"> <span class="header-section-number">4.1</span> Distributions</a>
   <ul class="collapse">
-  <li><a href="#density-plot" id="toc-density-plot" class="nav-link" data-scroll-target="#density-plot"> <span class="header-section-number">3.1.1</span> Density Plot</a></li>
-  <li><a href="#density-ridges" id="toc-density-ridges" class="nav-link" data-scroll-target="#density-ridges"> <span class="header-section-number">3.1.2</span> Density Ridges</a></li>
-  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"> <span class="header-section-number">3.1.3</span> Histogram</a></li>
-  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot"> <span class="header-section-number">3.1.4</span> Boxplot</a></li>
-  <li><a href="#violin-chart" id="toc-violin-chart" class="nav-link" data-scroll-target="#violin-chart"> <span class="header-section-number">3.1.5</span> Violin Chart</a></li>
+  <li><a href="#density-plot" id="toc-density-plot" class="nav-link" data-scroll-target="#density-plot"> <span class="header-section-number">4.1.1</span> Density Plot</a></li>
+  <li><a href="#density-ridges" id="toc-density-ridges" class="nav-link" data-scroll-target="#density-ridges"> <span class="header-section-number">4.1.2</span> Density Ridges</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"> <span class="header-section-number">4.1.3</span> Histogram</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot"> <span class="header-section-number">4.1.4</span> Boxplot</a></li>
+  <li><a href="#violin-chart" id="toc-violin-chart" class="nav-link" data-scroll-target="#violin-chart"> <span class="header-section-number">4.1.5</span> Violin Chart</a></li>
   </ul></li>
-  <li><a href="#comparisons" id="toc-comparisons" class="nav-link" data-scroll-target="#comparisons"> <span class="header-section-number">3.2</span> Comparisons</a>
+  <li><a href="#comparisons" id="toc-comparisons" class="nav-link" data-scroll-target="#comparisons"> <span class="header-section-number">4.2</span> Comparisons</a>
   <ul class="collapse">
-  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart"> <span class="header-section-number">3.2.1</span> Bar Chart</a></li>
-  <li><a href="#horizontal-bar-chart" id="toc-horizontal-bar-chart" class="nav-link" data-scroll-target="#horizontal-bar-chart"> <span class="header-section-number">3.2.2</span> Horizontal Bar Chart</a></li>
-  <li><a href="#line-chart" id="toc-line-chart" class="nav-link" data-scroll-target="#line-chart"> <span class="header-section-number">3.2.3</span> Line Chart</a></li>
+  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart"> <span class="header-section-number">4.2.1</span> Bar Chart</a></li>
+  <li><a href="#horizontal-bar-chart" id="toc-horizontal-bar-chart" class="nav-link" data-scroll-target="#horizontal-bar-chart"> <span class="header-section-number">4.2.2</span> Horizontal Bar Chart</a></li>
+  <li><a href="#line-chart" id="toc-line-chart" class="nav-link" data-scroll-target="#line-chart"> <span class="header-section-number">4.2.3</span> Line Chart</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -201,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualizing Data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visualizing Data</span></h1>
 </div>
 
 
@@ -225,11 +230,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Composition</strong></p></li>
 </ul>
 </blockquote>
-<section id="distributions" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="distributions"><span class="header-section-number">3.1</span> Distributions</h2>
+<section id="distributions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="distributions"><span class="header-section-number">4.1</span> Distributions</h2>
 <p>For this group the visuals all show the audience information about a distribution.</p>
-<section id="density-plot" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">3.1.1</span> Density Plot</h3>
+<section id="density-plot" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">4.1.1</span> Density Plot</h3>
 <p><a href="https://www.data-to-viz.com/graph/density.html">Here</a> is a good resource that goes more in depth on density plots.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in tidyverse package</span></span>
@@ -260,8 +265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="density-ridges" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="density-ridges"><span class="header-section-number">3.1.2</span> Density Ridges</h3>
+<section id="density-ridges" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="density-ridges"><span class="header-section-number">4.1.2</span> Density Ridges</h3>
 <p>Using the <code>ggridges</code> package you can compare and see distributions together. <a href="https://rdocumentation.org/packages/ggridges/versions/0.5.3">Click here</a> for the package documentation.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create density ridges with 3 randomly sampled distributions </span></span>
@@ -278,8 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="histogram" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">3.1.3</span> Histogram</h3>
+<section id="histogram" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">4.1.3</span> Histogram</h3>
 <p>Using a histogram is another common way to show a distribution. It may look like a “bar char” with many bars, however each “bar” is a bin, and it represents a range of numbers that falls within it’s respective bin. The height of the “bar” shows a count of how many values fall within a bin.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create histogram with random data </span></span>
@@ -293,8 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="boxplot" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="boxplot"><span class="header-section-number">3.1.4</span> Boxplot</h3>
+<section id="boxplot" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="boxplot"><span class="header-section-number">4.1.4</span> Boxplot</h3>
 <p>Boxplots can be a useful way to show a distribution, but the distribution is hidden behind each box meaning it could be misinterpreted.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create boxplots with random data</span></span>
@@ -308,8 +313,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="violin-chart" class="level3" data-number="3.1.5">
-<h3 data-number="3.1.5" class="anchored" data-anchor-id="violin-chart"><span class="header-section-number">3.1.5</span> Violin Chart</h3>
+<section id="violin-chart" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="violin-chart"><span class="header-section-number">4.1.5</span> Violin Chart</h3>
 <p>Similar to a boxplot but shows the shape of a distribution better.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create violin charts with random data</span></span>
@@ -324,11 +329,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="comparisons" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="comparisons"><span class="header-section-number">3.2</span> Comparisons</h2>
+<section id="comparisons" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="comparisons"><span class="header-section-number">4.2</span> Comparisons</h2>
 <p>For this group the visuals compare insights for the audience.</p>
-<section id="bar-chart" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">3.2.1</span> Bar Chart</h3>
+<section id="bar-chart" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">4.2.1</span> Bar Chart</h3>
 <p>Bar charts are very simple and effective at conveying information, never underestimate the power of a bar chart.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in iris dataset </span></span>
@@ -348,8 +353,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="horizontal-bar-chart" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="horizontal-bar-chart"><span class="header-section-number">3.2.2</span> Horizontal Bar Chart</h3>
+<section id="horizontal-bar-chart" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="horizontal-bar-chart"><span class="header-section-number">4.2.2</span> Horizontal Bar Chart</h3>
 <p>Similar to a bar chart, but a horizontal version, can be useful but when viewing, stakeholders can more easily distinguish a difference in the vertical counterpart than in the horizontal bar chart. This is the same bar chart as above, created with <code>+ geom_col()</code> but to rotate the plot I used the <code>+ coord_flip()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create horizontal bar chart</span></span>
@@ -366,8 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="line-chart" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="line-chart"><span class="header-section-number">3.2.3</span> Line Chart</h3>
+<section id="line-chart" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="line-chart"><span class="header-section-number">4.2.3</span> Line Chart</h3>
 <p>Line charts are essential when working time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in chickweight dataset</span></span>
@@ -491,8 +496,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cleaning-data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span>
+      <a href="./analyzing-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analyzing Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
