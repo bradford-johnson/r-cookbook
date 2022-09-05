@@ -3,5 +3,4 @@
 *.qmd linguist-detectable=true
 
 *.js linguist-detectable=false
-*.js linguist-language=JavaScript
 *.js linguist-detectable=false
