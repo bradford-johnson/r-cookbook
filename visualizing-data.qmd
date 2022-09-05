@@ -21,8 +21,10 @@ For this group the visuals all show the audience information about a distributio
 [Here](https://www.data-to-viz.com/graph/density.html) is a good resource that goes more in depth on density plots.
 
 ```{r message=FALSE, warning=FALSE}
+# load in tidyverse package
 library(tidyverse)
 
+# create some random data
 set.seed(0)
 
 n = 10000
@@ -33,9 +35,10 @@ for(i in 1:n){
   sample_means[i] = mean(rnorm(20, mean=0, sd=2))
 }
 
-
+# save this data into a data frame 
 sample_means_df <- data.frame(sample_means)
- 
+
+# create density plot 
 sample_means_df %>%
    ggplot(aes(sample_means)) + 
    geom_density(size = .5) +
@@ -105,6 +108,7 @@ samples_df <- sample_means1 %>%
 Using the `ggridges` package you can compare and see distributions together. [Click here](https://rdocumentation.org/packages/ggridges/versions/0.5.3) for the package documentation.
 
 ```{r}
+# create density ridges with 3 randomly sampled distributions 
 samples_df %>%
   ggplot(aes(x = sample_means, y = sample_n, fill = sample_n)) +
   geom_density_ridges(alpha = .7) + 
@@ -117,6 +121,7 @@ samples_df %>%
 Using a histogram is another common way to show a distribution. It may look like a "bar char" with many bars, however each "bar" is a bin, and it represents a range of numbers that falls within it's respective bin. The height of the "bar" shows a count of how many values fall within a bin.
 
 ```{r}
+# create histogram with random data 
 sample_means_df %>%
   ggplot(aes(x = sample_means)) +
   geom_histogram(bins = 30) +
@@ -129,6 +134,7 @@ sample_means_df %>%
 Boxplots can be a useful way to show a distribution, but the distribution is hidden behind each box meaning it could be misinterpreted.
 
 ```{r}
+# create boxplots with random data
 samples_df %>%
   ggplot(aes(x = sample_n, y = sample_means, fill = sample_n)) +
   geom_boxplot() +
@@ -141,6 +147,7 @@ samples_df %>%
 Similar to a boxplot but shows the shape of a distribution better.
 
 ```{r}
+# create violin charts with random data
 samples_df %>%
   ggplot(aes(x = sample_n, y = sample_means, fill = sample_n)) +
   geom_violin() +
@@ -152,6 +159,62 @@ samples_df %>%
 
 For this group the visuals compare insights for the audience.
 
-```{r}
+### Bar Chart
 
+Bar charts are very simple and effective at conveying information, never underestimate the power of a bar chart.
+
+```{r include=FALSE}
+library(tidyverse)
+library(janitor)
+```
+
+```{r warning=FALSE, message=FALSE}
+# read in iris dataset 
+iris_df <- iris %>%
+  clean_names()
+
+# group the data by species, then summarize the avg petal width for each species
+iris_df %>% 
+  group_by(species) %>%
+  summarize(avg_petal_width = mean(petal_width)) %>%
+  ggplot(aes(x = species, y = avg_petal_width, fill = species)) +
+  geom_col() +
+  labs(title = "Bar Chart", y = "Avg Petal Width", x = "Species") +
+  theme_classic()
+
+```
+
+### Horizontal Bar Chart
+
+Similar to a bar chart, but a horizontal version, can be useful but when viewing, stakeholders can more easily distinguish a difference in the vertical counterpart than in the horizontal bar chart. This is the same bar chart as above, created with `+ geom_col()` but to rotate the plot I used the `+ coord_flip()` function.
+
+```{r}
+# create horizontal bar chart
+iris_df %>% 
+  group_by(species) %>%
+  summarize(avg_petal_width = mean(petal_width)) %>%
+  ggplot(aes(x = species, y = avg_petal_width, fill = species)) +
+  geom_col() +
+  labs(title = "Horizontal Bar Chart", y = "Avg Petal Width", x = "Species") +
+  theme_classic() +
+  coord_flip()
+```
+
+### Line Chart
+
+Line charts are essential when working time.
+
+```{r warning=FALSE, message=FALSE}
+# read in chickweight dataset
+chick_df <- ChickWeight %>%
+  clean_names()
+
+# filter and group by chick 1, 21, 45
+chick_df %>%
+  filter(chick == 1|chick == 21|chick == 45) %>%
+  group_by(chick) %>%
+  ggplot(aes(x = time, y = weight, color = diet)) + 
+  geom_line(size = .8) +
+  labs(title = "Line Chart", x = "Time", y = "Chicken Weight") +
+  theme_classic()
 ```
