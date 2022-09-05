@@ -1,6 +1,3 @@
 *.qmd linguist-detectable=true
 *.qmd linguist-language=RMarkdown
 *.qmd linguist-detectable=true
-
-*.js linguist-detectable=false
-*.html linguist-detectable=false
