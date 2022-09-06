@@ -12,7 +12,7 @@ For the different visualizations, I will group them based on what they show:
 >
 > -   **Composition**
 
-## Distributions
+## **Distributions**
 
 For this group the visuals all show the audience information about a distribution.
 
@@ -155,7 +155,7 @@ samples_df %>%
   theme_classic()
 ```
 
-## Comparisons
+## **Comparisons**
 
 For this group the visuals compare insights for the audience.
 
@@ -219,15 +219,17 @@ chick_df %>%
   theme_classic()
 ```
 
-## Relationships
+## **Relationships**
 
-## **Composition** 
+...
+
+## **Composition**
 
 ### Pie Chart
 
 Pie charts are useful when used properly, as a means of showing the composition categories etc. There should not be more than 5 items being displayed as it is hard to actualize the composition of something when there is lots of small pieces. 2-4 total "slices" is ideal for seeing how the data is made up for specific insights.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(formattable)
 
 iris_df %>%
