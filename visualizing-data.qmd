@@ -218,3 +218,26 @@ chick_df %>%
   labs(title = "Line Chart", x = "Time", y = "Chicken Weight") +
   theme_classic()
 ```
+
+## Relationships
+
+## **Composition** 
+
+### Pie Chart
+
+Pie charts are useful when used properly, as a means of showing the composition categories etc. There should not be more than 5 items being displayed as it is hard to actualize the composition of something when there is lots of small pieces. 2-4 total "slices" is ideal for seeing how the data is made up for specific insights.
+
+```{r}
+library(formattable)
+
+iris_df %>%
+  group_by(species) %>%
+  summarise(cnt = n()) %>%
+  mutate(freq = formattable::percent(cnt / sum(cnt))) %>% 
+  ggplot(aes(x = "", y = freq, fill = species)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  geom_text(aes(label = paste0(freq)), position = position_stack(vjust=0.5)) +
+  labs(title = "Pie Chart")
+```
