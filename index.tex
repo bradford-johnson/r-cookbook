@@ -190,7 +190,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, enhanced, sharp corners, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, interior hidden, sharp corners, enhanced, borderline west={3pt}{0pt}{shadecolor}, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -305,12 +305,12 @@ Now lets see the first 6 rows of our new data frame.
 
 \begin{verbatim}
                               game current_players       date
-1 Counter-Strike: Global Offensive         629,740 2022-09-06
-2                           Dota 2         549,484 2022-09-06
-3                         Lost Ark         165,107 2022-09-06
-4                        Destiny 2         138,346 2022-09-06
-5                     Apex Legends         134,100 2022-09-06
-6              PUBG: BATTLEGROUNDS         115,060 2022-09-06
+1 Counter-Strike: Global Offensive         552,787 2022-09-06
+2                           Dota 2         488,251 2022-09-06
+3                         Lost Ark         159,253 2022-09-06
+4                        Destiny 2         135,692 2022-09-06
+5                     Apex Legends         124,235 2022-09-06
+6                  Team Fortress 2         105,468 2022-09-06
 \end{verbatim}
 
 \bookmarksetup{startatroot}
@@ -524,39 +524,6 @@ weight \textgreater{} 300 - \textbf{overweight}
 \NormalTok{    weight }\SpecialCharTok{\textgreater{}} \DecValTok{300} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}overweight\textquotesingle{}}
 \NormalTok{    ))}
 
-\CommentTok{\# view top 6 and bottom 6 entries}
-\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-  weight      feed weight_class
-1    179 horsebean  underweight
-2    160 horsebean  underweight
-3    136 horsebean  underweight
-4    227 horsebean       normal
-5    217 horsebean       normal
-6    168 horsebean  underweight
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tail}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-   weight   feed weight_class
-66    352 casein   overweight
-67    359 casein   overweight
-68    216 casein       normal
-69    222 casein       normal
-70    283 casein       normal
-71    332 casein   overweight
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# weight class count table }
 \NormalTok{chick\_classes }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(weight\_class) }\SpecialCharTok{\%\textgreater{}\%}
@@ -577,14 +544,56 @@ weight \textgreater{} 300 - \textbf{overweight}
 \section{\texorpdfstring{\textbf{Removing
 Outliers}}{Removing Outliers}}\label{removing-outliers}}
 
-There are different types of methods that you can use to identify and
-remove outliers. The method I will show is
+This image is from
+\href{https://campus.datacamp.com/courses/introduction-to-statistics-in-r/summary-statistics?ex=10}{DataCamp's}
+learning platform, and it shows a visual of a boxplot, and the outliers
+on either side of the distribution. To find the outliers on the lower
+range you do the following equation \texttt{Q1\ -\ 1.5\ x\ IQR}. To find
+outliers on the upper range you use this equation
+\texttt{Q3\ +\ 1.5\ *\ IQR}.
+
+\includegraphics{./data-camp-outliers.png}
+
+You can use those equations to then filter out the outliers and then
+continue with your analysis. I have created some data with outliers to
+show how you would do this in R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# removing outliers}
+\CommentTok{\# remove outliers steps}
+
+\CommentTok{\# 1. get Q1 and Q3 }
+\NormalTok{Q }\OtherTok{=} \FunctionTok{quantile}\NormalTok{(outlier\_df}\SpecialCharTok{$}\NormalTok{var1}\FloatTok{.1}\NormalTok{, }\AttributeTok{probs =} \FunctionTok{c}\NormalTok{(.}\DecValTok{25}\NormalTok{,.}\DecValTok{75}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# 2. get IQR}
+\NormalTok{iqr }\OtherTok{=} \FunctionTok{IQR}\NormalTok{(outlier\_df}\SpecialCharTok{$}\NormalTok{var1}\FloatTok{.1}\NormalTok{)}
+
+\CommentTok{\# 3. get upper and lower ranges}
+\NormalTok{up }\OtherTok{\textless{}{-}}\NormalTok{  Q[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{+}\FloatTok{1.5}\SpecialCharTok{*}\NormalTok{iqr }\CommentTok{\# Upper Range  }
+\NormalTok{low }\OtherTok{\textless{}{-}}\NormalTok{ Q[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\FloatTok{1.5}\SpecialCharTok{*}\NormalTok{iqr }\CommentTok{\# Lower Range}
+
+\CommentTok{\# 4. remove outliers (outlier\_df is the name of my data frame, var1.1 is the name of the column that I am removing outliers from)}
+
+\NormalTok{no\_outliers\_p }\OtherTok{\textless{}{-}}\NormalTok{ outlier\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(var1}\FloatTok{.1} \SpecialCharTok{\textgreater{}}\NormalTok{ low }\SpecialCharTok{\&}\NormalTok{ var1}\FloatTok{.1} \SpecialCharTok{\textless{}}\NormalTok{ up) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ var1}\FloatTok{.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Without Outliers"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{axis.ticks.y =} \FunctionTok{element\_blank}\NormalTok{())}
+
+\CommentTok{\# patchwork to show plots}
+\NormalTok{outlier\_p }\SpecialCharTok{/}\NormalTok{ no\_outliers\_p}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{./cleaning-data_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+}
+
+\end{figure}
 
 \bookmarksetup{startatroot}
 
