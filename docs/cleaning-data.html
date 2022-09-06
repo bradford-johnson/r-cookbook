@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Cleaning Data</strong></span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -158,22 +158,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./collecting-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Collecting Data</span></a>
+  <a href="./collecting-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Collecting Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cleaning-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></a>
+  <a href="./cleaning-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Cleaning Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analyzing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analyzing Data</span></a>
+  <a href="./analyzing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Analyzing Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visualizing Data</span></a>
+  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Visualizing Data</strong></span></a>
   </div>
 </li>
     </ul>
@@ -185,9 +185,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#column-names-headers" id="toc-column-names-headers" class="nav-link active" data-scroll-target="#column-names-headers"> <span class="header-section-number">2.1</span> Column Names (Headers)</a></li>
-  <li><a href="#filter-and-mutate-data" id="toc-filter-and-mutate-data" class="nav-link" data-scroll-target="#filter-and-mutate-data"> <span class="header-section-number">2.2</span> Filter and Mutate Data</a></li>
-  <li><a href="#removing-outliers" id="toc-removing-outliers" class="nav-link" data-scroll-target="#removing-outliers"> <span class="header-section-number">2.3</span> Removing Outliers</a></li>
+  <li><a href="#column-names-headers" id="toc-column-names-headers" class="nav-link active" data-scroll-target="#column-names-headers"> <span class="header-section-number">2.1</span> <strong>Column Names (Headers)</strong></a></li>
+  <li><a href="#filter-and-mutate-data" id="toc-filter-and-mutate-data" class="nav-link" data-scroll-target="#filter-and-mutate-data"> <span class="header-section-number">2.2</span> <strong>Filter and Mutate Data</strong></a></li>
+  <li><a href="#removing-outliers" id="toc-removing-outliers" class="nav-link" data-scroll-target="#removing-outliers"> <span class="header-section-number">2.3</span> <strong>Removing Outliers</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Cleaning Data</strong></span></h1>
 </div>
 
 
@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders, as your analysis can only be as strong as your data is clean. So very clean and structured data may lead you to entirely different insights than if you where to not clean it at all.</p>
 <p>There are countless ways to clean your data in R, and I will show you different ways I have cleaned up data sets.</p>
 <section id="column-names-headers" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="column-names-headers"><span class="header-section-number">2.1</span> Column Names (Headers)</h2>
+<h2 data-number="2.1" class="anchored" data-anchor-id="column-names-headers"><span class="header-section-number">2.1</span> <strong>Column Names (Headers)</strong></h2>
 <p>However, first I think it is important to have clean and concise but descriptive headers, when dealing with tabular data. There have been many times where I load some data into R, and the headers are all uppercase, contain spaces, or something else that makes them annoying to work with. The <code>janitor</code> package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the <code>readr</code> package to import a hand crafted <code>.csv</code> that I made as an example. I will load in the <code>dplyr</code> package so I can pipe the data into functions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
@@ -264,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="filter-and-mutate-data" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="filter-and-mutate-data"><span class="header-section-number">2.2</span> Filter and Mutate Data</h2>
+<h2 data-number="2.2" class="anchored" data-anchor-id="filter-and-mutate-data"><span class="header-section-number">2.2</span> <strong>Filter and Mutate Data</strong></h2>
 <p>Many times you may need to filter data, for example if you only want to see observations on a specific weekday, or with certain values. That is easy to do and with the <code>dplyr</code> package you will be able to really be creative with filtering, creating additional columns, and much more.</p>
 <p>For some of these examples I will use some data sets that come with R, the first data set we will look at is <code>chickwts</code> which looks at baby chick weights and feed types. I am going to summarize the counts for the feeds to quickly see all the options. Then I will filter some of the feeds as they are no longer available for my stakeholder in this scenario.</p>
 <div class="cell">
@@ -381,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="removing-outliers" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="removing-outliers"><span class="header-section-number">2.3</span> Removing Outliers</h2>
+<h2 data-number="2.3" class="anchored" data-anchor-id="removing-outliers"><span class="header-section-number">2.3</span> <strong>Removing Outliers</strong></h2>
 <p>There are different types of methods that you can use to identify and remove outliers. The method I will show is</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing outliers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -491,12 +491,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./collecting-data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Collecting Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Collecting Data</strong></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./analyzing-data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analyzing Data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Analyzing Data</strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

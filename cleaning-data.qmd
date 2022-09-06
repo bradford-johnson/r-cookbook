@@ -1,10 +1,10 @@
-# Cleaning Data
+# **Cleaning Data**
 
 Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders, as your analysis can only be as strong as your data is clean. So very clean and structured data may lead you to entirely different insights than if you where to not clean it at all.
 
 There are countless ways to clean your data in R, and I will show you different ways I have cleaned up data sets.
 
-## Column Names (Headers)
+## **Column Names (Headers)**
 
 However, first I think it is important to have clean and concise but descriptive headers, when dealing with tabular data. There have been many times where I load some data into R, and the headers are all uppercase, contain spaces, or something else that makes them annoying to work with. The `janitor` package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the `readr` package to import a hand crafted `.csv` that I made as an example. I will load in the `dplyr` package so I can pipe the data into functions.
 
@@ -37,7 +37,7 @@ clean_df %>%
   head()
 ```
 
-## Filter and Mutate Data
+## **Filter and Mutate Data**
 
 Many times you may need to filter data, for example if you only want to see observations on a specific weekday, or with certain values. That is easy to do and with the `dplyr` package you will be able to really be creative with filtering, creating additional columns, and much more.
 
@@ -102,7 +102,7 @@ chick_classes %>%
   summarise(n = n())
 ```
 
-## Removing Outliers
+## **Removing Outliers**
 
 There are different types of methods that you can use to identify and remove outliers. The method I will show is
 

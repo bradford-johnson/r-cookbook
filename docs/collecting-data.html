@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Collecting Data</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Collecting Data</strong></span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -158,22 +158,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./collecting-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Collecting Data</span></a>
+  <a href="./collecting-data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Collecting Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cleaning-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></a>
+  <a href="./cleaning-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Cleaning Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analyzing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analyzing Data</span></a>
+  <a href="./analyzing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Analyzing Data</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visualizing Data</span></a>
+  <a href="./visualizing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Visualizing Data</strong></span></a>
   </div>
 </li>
     </ul>
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#web-scraping" id="toc-web-scraping" class="nav-link active" data-scroll-target="#web-scraping"> <span class="header-section-number">1.1</span> Web Scraping</a></li>
+  <li><a href="#web-scraping" id="toc-web-scraping" class="nav-link active" data-scroll-target="#web-scraping"> <span class="header-section-number">1.1</span> <strong>Web Scraping</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Collecting Data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Collecting Data</strong></span></h1>
 </div>
 
 
@@ -211,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The first step to any data analytics project is collecting data. This step may not be always necessary as in many cases the data has already been collected. For example in my current role we get daily analytics emails each morning that contain the data from the previous day. So if this data is relevant and all we need for our analysis we can skip the “collecting data” stage.</p>
 <p>But what if we wanted to gain different insights that require new data? Then we would need to collect new data. Depending on what I was doing I could add more data to the current data I have, or create a new set of data all together.</p>
 <section id="web-scraping" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="web-scraping"><span class="header-section-number">1.1</span> Web Scraping</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="web-scraping"><span class="header-section-number">1.1</span> <strong>Web Scraping</strong></h2>
 <p>The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the <code>rvest</code> package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting).</p>
 <p>Below I will show a simple script using the <code>rvest</code>, <code>lubridate</code> and <code>tidyverse</code> packages that can scrape us some data from <a href="https://store.steampowered.com/stats/">Steam’s</a> game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live <em>Top games by current player count</em> table.</p>
 <div class="cell">
@@ -247,12 +247,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              game current_players       date
-1 Counter-Strike: Global Offensive         518,347 2022-09-05
-2                           Dota 2         467,102 2022-09-05
-3                         Lost Ark         164,095 2022-09-05
-4                     Apex Legends         142,374 2022-09-05
-5                        Destiny 2         138,539 2022-09-05
-6                             Rust         105,183 2022-09-05</code></pre>
+1 Counter-Strike: Global Offensive         629,740 2022-09-06
+2                           Dota 2         549,484 2022-09-06
+3                         Lost Ark         165,107 2022-09-06
+4                        Destiny 2         138,346 2022-09-06
+5                     Apex Legends         134,100 2022-09-06
+6              PUBG: BATTLEGROUNDS         115,060 2022-09-06</code></pre>
 </div>
 </div>
 
@@ -365,7 +365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cleaning-data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Cleaning Data</strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

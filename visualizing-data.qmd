@@ -1,4 +1,4 @@
-# Visualizing Data
+# **Visualizing Data**
 
 There are many ways you can visualize data, and selecting a way to visualize your data depends on what kind of data you have. For example, if you have geographic data, then using a map can be an option. The visual you pick also should be effective at telling the story for your stakeholders.
 
