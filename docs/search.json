@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "analyzing-data.html",
+    "href": "analyzing-data.html",
+    "title": "3  Analyzing Data",
+    "section": "",
+    "text": "Once your data is cleaned up then it is ready to investigate the data in order to find insights…place holder…"
+  },
+  {
+    "objectID": "analyzing-data.html#statistical-tests",
+    "href": "analyzing-data.html#statistical-tests",
+    "title": "3  Analyzing Data",
+    "section": "3.1 Statistical Tests",
+    "text": "3.1 Statistical Tests\n…place holder…\n\n3.1.1 T-Test\nA t-test is a good way to see if there is a difference between two groups and “quantifying” the difference of the groups. Learn more about the t-test.\nLets say I wanted to know if there was a difference between the US and Netherlands when it comes to life expectancy. My next steps would be to create a null hypothesis and the alternative hypothesis. For this type of question the null would be that the averages of both groups are equal, the alternative is that they are not equal.\n\nNull hypothesis: average life expectancy of US = average life expectanvy of the Netherlands\nAlternative hypothesis: average life expectancy of US ≠ average life expectanvy of the Netherlands\n\nNext I want to select my critical value which gives “boundaries” to the acceptance of the test. A common critical value that is used is 0.05, and this means that there is a 5% chance if done 100 times, that I will reject the null hypothesis and accept the alternative. Critical values such as 0.01 is even more accurate as there is a 1% chance of rejecting the null, but a 99% chance of retaining the null, so choosing a critical value can be a balancing act.\n\nCritical Value: 𝛼 = 0.05\n\nNow to run the t-test to see the results.\n\n# load packages: gapminder for data + tidyverse meta package\nlibrary(gapminder)\nlibrary(tidyverse)\n\n# filter data for life exp and countries: US and Netherlands\ndf1 <- gapminder %>%\n  select(country, lifeExp) %>%\n  filter(country == \"United States\" | country == \"Netherlands\") \n  \n t.test(data = df1, lifeExp ~ country)\n\n\n    Welch Two Sample t-test\n\ndata:  lifeExp by country\nt = 1.804, df = 20.316, p-value = 0.08608\nalternative hypothesis: true difference in means between group Netherlands and group United States is not equal to 0\n95 percent confidence interval:\n -0.3366519  4.6766519\nsample estimates:\n  mean in group Netherlands mean in group United States \n                    75.6485                     73.4785 \n\n\nThe results of our t-test show us that the Netherlands has a higher average life expectancy than the US, however with a p-value of .086 I will retain my null hypothesis as there is not a statistical significance in the difference of the means for each of the countries."
+  }
+]

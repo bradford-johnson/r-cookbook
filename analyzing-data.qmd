@@ -1,3 +1,38 @@
 # **Analyzing Data**
 
-Once your data is cleaned up then it is ready to investigate the data in order to find insights...
+Once your data is cleaned up then it is ready to investigate the data in order to find insights...place holder...
+
+## **Statistical Tests**
+
+...place holder...
+
+### **T-Test**
+
+A t-test is a good way to see if there is a difference between two groups and "quantifying" the difference of the groups. [Learn more](https://towardsdatascience.com/the-statistical-analysis-t-test-explained-for-beginners-and-experts-fd0e358bbb62) about the t-test.
+
+Lets say I wanted to know if there was a difference between the US and Netherlands when it comes to life expectancy. My next steps would be to create a **null hypothesis** and the **alternative hypothesis**. For this type of question the **null** would be that the averages of both groups are equal, the alternative is that they are not equal.
+
+> Null hypothesis: `average life expectancy of US = average life expectanvy of the Netherlands`
+>
+> Alternative hypothesis: `average life expectancy of US ≠ average life expectanvy of the Netherlands`
+
+Next I want to select my **critical value** which gives "boundaries" to the acceptance of the test. A common critical value that is used is **0.05**, and this means that there is a 5% chance if done 100 times, that I will reject the null hypothesis and accept the alternative. Critical values such as 0.01 is even more accurate as there is a 1% chance of rejecting the null, but a 99% chance of retaining the null, so choosing a critical value can be a balancing act.
+
+> Critical Value: `𝛼 = 0.05`
+
+Now to run the t-test to see the results.
+
+```{r warning=FALSE, message=FALSE}
+# load packages: gapminder for data + tidyverse meta package
+library(gapminder)
+library(tidyverse)
+
+# filter data for life exp and countries: US and Netherlands
+df1 <- gapminder %>%
+  select(country, lifeExp) %>%
+  filter(country == "United States" | country == "Netherlands") 
+  
+ t.test(data = df1, lifeExp ~ country)
+```
+
+The results of our t-test show us that the Netherlands has a higher average life expectancy than the US, however with a `p-value of .086` I will retain my null hypothesis as there is not a statistical significance in the difference of the means for each of the countries.
