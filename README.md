@@ -1,4 +1,4 @@
-# r-cookbook
+# r-cookbook | ![WIP](https://img.shields.io/badge/%E2%8F%B3-Work%20in%20progress-red)
 
 This repository is an 'R cookbook' that I created with inspiration from others such as [Cookbook for R](http://www.cookbook-r.com/) or [R Graphics Cookbook](https://books.google.com/books?id=fxL4tu5bzAAC&printsec=frontcover&hl=en#v=onepage&q&f=false)
 <br> <br> 
