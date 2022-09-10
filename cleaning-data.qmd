@@ -1,22 +1,44 @@
 # **Cleaning Data**
 
-Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders, as your analysis can only be as strong as your data is clean. So very clean and structured data may lead you to entirely different insights than if you where to not clean it at all.
+Cleaning data is one of the most important steps to any data analytics project. Cleaning data can involve anything from changing the case of characters from uppercase to lowercase to removing outliers from a data set, or even figuring out what to do with missing values. Having clean data is essential for making recommendations to stakeholders, as your analysis can only be as strong as your data is clean.
 
 There are countless ways to clean your data in R, and I will show you different ways I have cleaned up data sets.
 
 ## **Column Names (Headers)**
 
-However, first I think it is important to have clean and concise but descriptive headers, when dealing with tabular data. There have been many times where I load some data into R, and the headers are all uppercase, contain spaces, or something else that makes them annoying to work with. The `janitor` package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the `readr` package to import a hand crafted `.csv` that I made as an example. I will load in the `dplyr` package so I can pipe the data into functions.
+Dealing with dirty data is part of being a data analyst, and the `janitor` package is great because it can help clean up the headers (or column names) so they are easier to work with. I will load in the `readr` package to import a hand crafted `.csv` that I made as an example. I will also load in the `dplyr` package so I can pipe the data into functions.
+
+Here is how you install and load the packages.
+
+```{r eval=FALSE}
+install.packages("janitor")
+install.packages("readr")
+install.packages("dplyr")
+```
 
 ```{r warning=FALSE,message=FALSE}
-# load packages
 library(janitor)
 library(readr)
 library(dplyr)
+```
 
+Now I will load in the data frame with dirty column names / headers.
+
+```{r warning=FALSE,message=FALSE}
 # read in csv with no changes
 dirty_df <- read_csv('janitor-example.csv')
+```
 
+Here is what the dirty data frame looks like.
+
+```{r}
+dirty_df %>% 
+  head()
+```
+
+Now using the `clean_names()` function from the `janitor` package along with some `mutate()` functions I will load in the same data frame.
+
+```{r warning=FALSE,message=FALSE}
 # read in csv but with janitor and dplyr functions
 clean_df <- read_csv('janitor-example.csv') %>%
   clean_names() %>%
@@ -26,13 +48,9 @@ clean_df <- read_csv('janitor-example.csv') %>%
   select(weekday, avg_temp_f, weather_condition)
 ```
 
-Here is how the original data frame and cleaned data frame look. The column names are now easier to work with, and better understood.
+Here is how the cleaned data frame looks. The column names are now easier to work with, and much better understood.
 
 ```{r}
-# head()
-dirty_df %>% 
-  head()
-
 clean_df %>%
   head()
 ```
@@ -121,8 +139,6 @@ outlier_p <- outlier_df %>%
   theme_classic() +
   labs(title = "With Outliers") +
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
-
-
 ```
 
 ```{r warning=FALSE,message=FALSE}
