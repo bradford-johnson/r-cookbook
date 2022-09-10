@@ -24,29 +24,52 @@ library(RPostgres)
 library(dplyr)
 ```
 
-After loading the packages you can then connect to your database with this code and your database's credentials
+After loading the packages you can then connect to your database with this code and your database's credentials.
 
 ```{r eval=FALSE}
 # establish connection with postgres data base
-con <- dbConnect(RPostgres::Postgres(),dbname = '',  # enter name of database in the single quotes
-                 host = 'address', # replace 'address' and enter the address of the database inside the single quotes
-                 port = 5432, # enter the port for the database 
-                 user = 'username', # replace 'username' with your username inside single quotes
-                 password = 'password') # replace 'password' with your password inside single quotes
+con <- dbConnect(RPostgres::Postgres(),dbname = '',  
+      # enter name of database in the single quotes
+                 
+      host = 'address', 
+# replace 'address' and enter the address of the database inside the single quotes
+                
+      port = 5432, 
+# enter the port for the database 
 
-# code to make sql query ---- inside of the double quotes you can create your query
+      user = 'username', 
+# replace 'username' with your username inside single quotes
+                 
+      password = 'password') 
+# replace 'password' with your password inside single quotes
+```
+
+After establishing your connection, you can then create your `SQL` query.
+
+```{r eval=FALSE}
+# code to make sql query --inside of the double quotes you can create your query
 res <- dbSendQuery(con, "
                    SELECT *
                    FROM 
-                   WHERE ;
-                   ")
-# execute query
-df <- dbFetch(res) # this will save the results of the query as an R data frame called 'DF'
+                   WHERE ;")
+```
 
+To execute your query you will then want to write and run this code, using `dbFetch()` with the name of your query object being the argument, in this case it is `res`. The results from this query will be saved as the name you assign it, for this code it is called `df`.
+
+```{r eval=FALSE}
+# execute query
+df <- dbFetch(res) 
+
+# this will save the results of the query as an R data frame called 'DF'
+```
+
+Once you have run the query you can then clean the query and disconnect from the database using these functions and arguments respectively.
+
+```{r eval=FALSE}
 # clear query
 dbClearResult(res)
 
-# disconnect from data base
+# disconnect from database
 dbDisconnect(con)
 ```
 
@@ -56,12 +79,18 @@ The way we collect data varies from using a pencil and notepad, to an automated 
 
 Below I will show a simple script using the `rvest`, `lubridate` and `tidyverse` packages that can scrape us some data from [Steam's](https://store.steampowered.com/stats/) game stats page. Steam is a video game distribution service, and we will scrape a couple columns from their live *Top games by current player count* table.
 
+First load the packages
+
 ```{r warning=FALSE,message=FALSE,error=FALSE}
 # load packages
 library(tidyverse)
 library(rvest)
 library(lubridate)
+```
 
+Next you will set up the parameters so `rvest` knows where to get the data from. The `html_nodes` can be found using the browser extension `SelectorGadget` found [here](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb). Using this extension you can highlight what you want to web scrape and copy/paste the nodes from `SelectorGadget`.
+
+```{r warning=FALSE,message=FALSE,error=FALSE}
 # link to get data from
 link = "https://store.steampowered.com/stats/" 
 
@@ -69,11 +98,19 @@ link = "https://store.steampowered.com/stats/"
 page = read_html(link) 
 
 # scrape top 100 games by current players
-game = page %>% html_nodes(".gameLink") %>% html_text()  
+game = page %>% 
+  html_nodes(".gameLink") %>% 
+  html_text()  
 
 # scrape number of players for each game 
-current_players = page %>% html_nodes("td:nth-child(1) .currentServers") %>% html_text() 
+current_players = page %>% 
+  html_nodes("td:nth-child(1) .currentServers") %>% 
+  html_text() 
+```
 
+After getting all the data you will want to put it into a data frame to work with it, so you will then use the `data.frame()` function and add in the data you pulled from online. Below you will see how I am creating the data frame and adding in the current data as a column so I know when I collected this data.
+
+```{r}
 # put both game and player data into a data frame
 df = data.frame(game, current_players) 
 
@@ -83,11 +120,34 @@ current_date <- as_datetime(Sys.Date())
 # update data frame with mutated column that adds current_date
 df <- df %>% 
   mutate(date = current_date)
- 
 ```
 
-Now lets see the first 6 rows of our new data frame.
+Now lets see the first 6 rows of our new data frame that we crafted using `rvest`.
 
 ```{r warning=FALSE,message=FALSE,error=FALSE}
 head(df)
+```
+
+## **Twitter 'Scraping'**
+
+Tons of data is created on social media, and using social media can be a great source for businesses to see how their customers may feel about the goods or services they offer, advertise more products or intervene when a customer had a bad experience.
+
+You can access data from Twitter by making a [Twitter Developer's Account](https://developer.twitter.com/en) and by using the Twitter API. After making a developers account it is very easy to get the data using the `rtweet` package. You can access the documentation for `rtweet` [here](https://docs.ropensci.org/rtweet/).
+
+First you need to make sure you default browser is open and you are logged into your Twitter account. After you do this make sure to install the `rtweet` package and load it in `RStudio`.
+
+```{r eval=FALSE}
+install.packages("rtweet")
+
+library(rtweet)
+```
+
+After installing the package and loading it, you can use this code to set up your authentication and the `search_tweets()` function can retrieve Tweet data based on your parameters.
+
+```{r eval=FALSE}
+auth_setup_default()
+
+auth_has_default()
+
+rt <- search_tweets("rocket league", n = 100, include_rts = FALSE, lang = "en")
 ```
