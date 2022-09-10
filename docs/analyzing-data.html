@@ -211,10 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Once your data is cleaned up then it is ready to investigate the data in order to find insights…place holder…</p>
+<p>Once your data is cleaned up then it is ready to investigate the data in order to find your insights and how significant they are.</p>
 <section id="statistical-tests" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="statistical-tests"><span class="header-section-number">3.1</span> <strong>Statistical Tests</strong></h2>
-<p>…place holder…</p>
 <section id="t-test" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="t-test"><span class="header-section-number">3.1.1</span> <strong>T-Test</strong></h3>
 <p>A t-test is a good way to see if there is a difference between two groups and “quantifying” the difference of the groups. <a href="https://towardsdatascience.com/the-statistical-analysis-t-test-explained-for-beginners-and-experts-fd0e358bbb62">Learn more</a> about the t-test.</p>
@@ -254,6 +253,30 @@ sample estimates:
 </div>
 </div>
 <p>The results of our t-test show us that the Netherlands has a higher average life expectancy than the US, however with a <code>p-value of .086</code> I will retain my null hypothesis as there is not a statistical significance in the difference of the means for each of the countries.</p>
+<p>What if I look at the life expectancy between the US and South Africa with the same parameters as before?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter data for life exp and countries: US and South Africa</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, lifeExp) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"South Africa"</span>) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">t.test</span>(<span class="at">data =</span> df2, lifeExp <span class="sc">~</span> country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  lifeExp by country
+t = -10.549, df = 18.243, p-value = 3.392e-09
+alternative hypothesis: true difference in means between group South Africa and group United States is not equal to 0
+95 percent confidence interval:
+ -23.36235 -15.60832
+sample estimates:
+ mean in group South Africa mean in group United States 
+                   53.99317                    73.47850 </code></pre>
+</div>
+</div>
+<p>As you can see there is a much larger difference in the average life expectancy between the countries, and with a <code>p-value</code> of <code>3.392e-09</code>. This p-value is in scientific notation as it is such a small decimal, in decimal form it would be <code>0.000000003392</code> which is much smaller than .05 meaning this difference in life expectancy is statistically significant. In this case I would reject my null hypothesis and accept the alternative hypothesis that the average life expectancy of the United States is not equal to the average life expectancy of South Africa.</p>
+<p>If I where reporting this insight, I could say that the life expectancy in the United States is significantly higher than that of South Africa… and instead of giving the p-value in decimal format or scientific notation, I could say <code>p &lt; .05</code>.</p>
 
 
 </section>

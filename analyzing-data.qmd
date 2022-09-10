@@ -1,10 +1,8 @@
 # **Analyzing Data**
 
-Once your data is cleaned up then it is ready to investigate the data in order to find insights...place holder...
+Once your data is cleaned up then it is ready to investigate the data in order to find your insights and how significant they are.
 
 ## **Statistical Tests**
-
-...place holder...
 
 ### **T-Test**
 
@@ -36,3 +34,18 @@ df1 <- gapminder %>%
 ```
 
 The results of our t-test show us that the Netherlands has a higher average life expectancy than the US, however with a `p-value of .086` I will retain my null hypothesis as there is not a statistical significance in the difference of the means for each of the countries.
+
+What if I look at the life expectancy between the US and South Africa with the same parameters as before?
+
+```{r warning=FALSE, message=FALSE}
+# filter data for life exp and countries: US and South Africa
+df2 <- gapminder %>%
+  select(country, lifeExp) %>%
+  filter(country == "United States" | country == "South Africa") 
+  
+ t.test(data = df2, lifeExp ~ country)
+```
+
+As you can see there is a much larger difference in the average life expectancy between the countries, and with a `p-value` of `3.392e-09`. This p-value is in scientific notation as it is such a small decimal, in decimal form it would be `0.000000003392` which is much smaller than .05 meaning this difference in life expectancy is statistically significant. In this case I would reject my null hypothesis and accept the alternative hypothesis that the average life expectancy of the United States is not equal to the average life expectancy of South Africa.
+
+If I where reporting this insight, I could say that the life expectancy in the United States is significantly higher than that of South Africa... and instead of giving the p-value in decimal format or scientific notation, I could say `p < .05`.
