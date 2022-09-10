@@ -4,6 +4,52 @@ The first step to any data analytics project is collecting data. This step may n
 
 But what if we wanted to gain different insights that require new data? Then we would need to collect new data. Depending on what I was doing I could add more data to the current data I have, or create a new set of data all together.
 
+## **Connecting to postgreSQL Database**
+
+Connecting to a database can be an effective way to import data into R for analysis. For this example I will be showing how to connect to a postgreSQL database, as that is what I use.
+
+You will need the `DBI`, `RPostgres`, and `dplyr` packages.
+
+```{r eval=FALSE}
+install.packages("DBI")
+install.packages("RPostgres")
+install.packages("dplyr")
+```
+
+Once you install the packages you will need to load them.
+
+```{r eval=FALSE}
+library(DBI)
+library(RPostgres)
+library(dplyr)
+```
+
+After loading the packages you can then connect to your database with this code and your database's credentials
+
+```{r eval=FALSE}
+# establish connection with postgres data base
+con <- dbConnect(RPostgres::Postgres(),dbname = '',  # enter name of database in the single quotes
+                 host = 'address', # replace 'address' and enter the address of the database inside the single quotes
+                 port = 5432, # enter the port for the database 
+                 user = 'username', # replace 'username' with your username inside single quotes
+                 password = 'password') # replace 'password' with your password inside single quotes
+
+# code to make sql query ---- inside of the double quotes you can create your query
+res <- dbSendQuery(con, "
+                   SELECT *
+                   FROM 
+                   WHERE ;
+                   ")
+# execute query
+df <- dbFetch(res) # this will save the results of the query as an R data frame called 'DF'
+
+# clear query
+dbClearResult(res)
+
+# disconnect from data base
+dbDisconnect(con)
+```
+
 ## **Web Scraping**
 
 The way we collect data varies from using a pencil and notepad, to an automated process that saves every entry in the cloud. One way I have used R to collect data is by web scraping. Using the `rvest` package can allow you to collect data from the internet with minimal effort (avoid the constant copy/pasting).
