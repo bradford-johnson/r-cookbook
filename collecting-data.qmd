@@ -144,6 +144,8 @@ library(rtweet)
 
 After installing the package and loading it, you can use this code to set up your authentication and the `search_tweets()` function can retrieve Tweet data based on your parameters.
 
+In this call of `search_tweets()` it will search for Tweets that contain "rocket league", `n = 100` means it will return 100 tweets, `include_rts = FALSE` means that it will **not** include and return Retweets, and finally `lang = "en"` means it will only return Tweets in English.
+
 ```{r eval=FALSE}
 auth_setup_default()
 

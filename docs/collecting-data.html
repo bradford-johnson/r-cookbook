@@ -315,12 +315,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              game current_players       date
-1 Counter-Strike: Global Offensive         798,022 2022-09-10
-2                           Dota 2         718,206 2022-09-10
-3                     Apex Legends         227,732 2022-09-10
-4              PUBG: BATTLEGROUNDS         220,758 2022-09-10
+1 Counter-Strike: Global Offensive         782,859 2022-09-10
+2                           Dota 2         711,840 2022-09-10
+3                     Apex Legends         220,642 2022-09-10
+4              PUBG: BATTLEGROUNDS         213,567 2022-09-10
 5                         Lost Ark         197,303 2022-09-10
-6               Grand Theft Auto V         131,127 2022-09-10</code></pre>
+6               Grand Theft Auto V         129,355 2022-09-10</code></pre>
 </div>
 </div>
 </section>
@@ -335,6 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After installing the package and loading it, you can use this code to set up your authentication and the <code>search_tweets()</code> function can retrieve Tweet data based on your parameters.</p>
+<p>In this call of <code>search_tweets()</code> it will search for Tweets that contain “rocket league”, <code>n = 100</code> means it will return 100 tweets, <code>include_rts = FALSE</code> means that it will <strong>not</strong> include and return Retweets, and finally <code>lang = "en"</code> means it will only return Tweets in English.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auth_setup_default</span>()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
