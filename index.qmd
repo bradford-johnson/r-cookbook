@@ -2,7 +2,7 @@
 
 This is a cookbook for R created by Bradford Johnson. You can use the menu on the left the navigate the different chapters and the Table of contents on the right to see different sections for the current page you are on.
 
-This Quarto book contains vignettes of R code, and this book is not meant to be a full step by step process for everything you need to know in order to analyze data in R.
+This Quarto book contains vignettes of R code, and shows ways to approach each step of the data analysis process.
 
 ## My Links
 

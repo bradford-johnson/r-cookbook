@@ -117,5 +117,12 @@
     "title": "2  Cleaning Data",
     "section": "2.4 Adding Percent Signs (%+)",
     "text": "2.4 Adding Percent Signs (%+)\nOften you may be dealing with decimals and you will want to present them in percent form in order to allow stakeholders to better understand the context. Or mane you will want to create a percent column to show the composition of the total dataset by groups. The formattable package allows you to easily format your data in order to present the data easier.\nYou can install and load the formattable package with the following code.\n\ninstall.packages(\"formattable\")\nlibrary(formattable)\n\nHere is how you would break down the iris dataset by species, using the formattable package to get percents of each species.\n\niris_df %>%\n  group_by(species) %>%\n  summarise(cnt = n()) %>%\n  mutate(freq = formattable::percent(cnt / sum(cnt)))\n\n# A tibble: 3 x 3\n  species      cnt freq      \n  <fct>      <int> <formttbl>\n1 setosa        50 33.33%    \n2 versicolor    50 33.33%    \n3 virginica     50 33.33%"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R-Cookbook",
+    "section": "",
+    "text": "This is a cookbook for R created by Bradford Johnson. You can use the menu on the left the navigate the different chapters and the Table of contents on the right to see different sections for the current page you are on.\nThis Quarto book contains vignettes of R code, and shows ways to approach each step of the data analysis process.\n\n\nGitHub Profile Link\nProject Repository Link\n\n\n\nTo learn more about Quarto books visit https://quarto.org/docs/books."
   }
 ]
