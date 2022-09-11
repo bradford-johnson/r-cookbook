@@ -253,7 +253,8 @@ gapminder %>%
   geom_point(alpha = .3) +
   geom_smooth(method = "lm") +
   facet_wrap(~continent) +
-  labs(title = "Scatter Plot with more levels", x = "GDP Per Cap", y = "Life Expectancy") + 
+  labs(title = "Scatter Plot with more levels", 
+       x = "GDP Per Cap", y = "Life Expectancy") + 
   theme_minimal()
 ```
 
