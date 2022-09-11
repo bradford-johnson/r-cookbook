@@ -239,7 +239,12 @@ scatter_plot_df %>%
   theme_classic()
 ```
 
-A scatter plot with more layers can use aesthetics such as `size`, `fill`, `shape`, `geom_smooth()` or `facet_wrap()` . expectancy
+A scatter plot with more layers can use aesthetics such as `size`, `fill`, `shape`, `geom_smooth()` or `facet_wrap()`.
+
+```{r include=FALSE}
+library(tidyverse)
+library(gapminder)
+```
 
 ```{r}
 gapminder %>%
