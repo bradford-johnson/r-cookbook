@@ -167,3 +167,30 @@ no_outliers_p <- outlier_df %>%
 # patchwork to show plots
 outlier_p / no_outliers_p
 ```
+
+## **Adding Percent Signs (%+)**
+
+Often you may be dealing with decimals and you will want to present them in percent form in order to allow stakeholders to better understand the context. Or mane you will want to create a percent column to show the composition of the total dataset by groups. The `formattable` package allows you to easily format your data in order to present the data easier.
+
+You can install and load the `formattable` package with the following code.
+
+```{r eval=FALSE}
+install.packages("formattable")
+library(formattable)
+```
+
+```{r include=FALSE}
+library(janitor)
+library(tidyverse)
+iris_df <- iris %>%
+  clean_names()
+```
+
+Here is how you would break down the `iris` dataset by species, using the `formattable` package to get percents of each species.
+
+```{r}
+iris_df %>%
+  group_by(species) %>%
+  summarise(cnt = n()) %>%
+  mutate(freq = formattable::percent(cnt / sum(cnt)))
+```

@@ -103,5 +103,19 @@
     "title": "1  Collecting Data",
     "section": "1.3 Twitter ‘Scraping’",
     "text": "1.3 Twitter ‘Scraping’\nTons of data is created on social media, and using social media can be a great source for businesses to see how their customers may feel about the goods or services they offer, advertise more products or intervene when a customer had a bad experience.\nYou can access data from Twitter by making a Twitter Developer’s Account and by using the Twitter API. After making a developers account it is very easy to get the data using the rtweet package. You can access the documentation for rtweet here.\nFirst you need to make sure you default browser is open and you are logged into your Twitter account. After you do this make sure to install the rtweet package and load it in RStudio.\n\ninstall.packages(\"rtweet\")\n\nlibrary(rtweet)\n\nAfter installing the package and loading it, you can use this code to set up your authentication and the search_tweets() function can retrieve Tweet data based on your parameters.\nIn this call of search_tweets() it will search for Tweets that contain “rocket league”, n = 100 means it will return 100 tweets, include_rts = FALSE means that it will not include and return Retweets, and finally lang = \"en\" means it will only return Tweets in English.\n\nauth_setup_default()\n\nauth_has_default()\n\nrt <- search_tweets(\"rocket league\", n = 100, include_rts = FALSE, lang = \"en\")"
+  },
+  {
+    "objectID": "cleaning-data.html#adding-percent-signs--",
+    "href": "cleaning-data.html#adding-percent-signs--",
+    "title": "2  Cleaning Data",
+    "section": "2.4 Adding Percent Signs -> %",
+    "text": "2.4 Adding Percent Signs -> %\nOften you may be dealing with decimals and you will want to present them in percent form in order to allow stakeholders to better understand the context. Or mane you will want to create a percent column to show the composition of the total dataset by groups. The formattable package allows you to easily format your data in order to present the data easier.\nYou can install and load the formattable package with the following code.\n\ninstall.packages(\"formattable\")\nlibrary(formattable)\n\nHere is how you would break down the iris dataset by species, using the formattable package to get percents of each species.\n\niris_df %>%\n  group_by(species) %>%\n  summarise(cnt = n()) %>%\n  mutate(freq = formattable::percent(cnt / sum(cnt)))\n\n# A tibble: 3 x 3\n  species      cnt freq      \n  <fct>      <int> <formttbl>\n1 setosa        50 33.33%    \n2 versicolor    50 33.33%    \n3 virginica     50 33.33%"
+  },
+  {
+    "objectID": "cleaning-data.html#adding-percent-signs",
+    "href": "cleaning-data.html#adding-percent-signs",
+    "title": "2  Cleaning Data",
+    "section": "2.4 Adding Percent Signs (%+)",
+    "text": "2.4 Adding Percent Signs (%+)\nOften you may be dealing with decimals and you will want to present them in percent form in order to allow stakeholders to better understand the context. Or mane you will want to create a percent column to show the composition of the total dataset by groups. The formattable package allows you to easily format your data in order to present the data easier.\nYou can install and load the formattable package with the following code.\n\ninstall.packages(\"formattable\")\nlibrary(formattable)\n\nHere is how you would break down the iris dataset by species, using the formattable package to get percents of each species.\n\niris_df %>%\n  group_by(species) %>%\n  summarise(cnt = n()) %>%\n  mutate(freq = formattable::percent(cnt / sum(cnt)))\n\n# A tibble: 3 x 3\n  species      cnt freq      \n  <fct>      <int> <formttbl>\n1 setosa        50 33.33%    \n2 versicolor    50 33.33%    \n3 virginica     50 33.33%"
   }
 ]

@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#column-names-headers" id="toc-column-names-headers" class="nav-link active" data-scroll-target="#column-names-headers"> <span class="header-section-number">2.1</span> <strong>Column Names (Headers)</strong></a></li>
   <li><a href="#filter-and-mutate-data" id="toc-filter-and-mutate-data" class="nav-link" data-scroll-target="#filter-and-mutate-data"> <span class="header-section-number">2.2</span> <strong>Filter and Mutate Data</strong></a></li>
   <li><a href="#removing-outliers" id="toc-removing-outliers" class="nav-link" data-scroll-target="#removing-outliers"> <span class="header-section-number">2.3</span> <strong>Removing Outliers</strong></a></li>
+  <li><a href="#adding-percent-signs" id="toc-adding-percent-signs" class="nav-link" data-scroll-target="#adding-percent-signs"> <span class="header-section-number">2.4</span> <strong>Adding Percent Signs (%+)</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -402,6 +403,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>outlier_p <span class="sc">/</span> no_outliers_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="cleaning-data_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="adding-percent-signs" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="adding-percent-signs"><span class="header-section-number">2.4</span> <strong>Adding Percent Signs (%+)</strong></h2>
+<p>Often you may be dealing with decimals and you will want to present them in percent form in order to allow stakeholders to better understand the context. Or mane you will want to create a percent column to show the composition of the total dataset by groups. The <code>formattable</code> package allows you to easily format your data in order to present the data easier.</p>
+<p>You can install and load the <code>formattable</code> package with the following code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"formattable"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(formattable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is how you would break down the <code>iris</code> dataset by species, using the <code>formattable</code> package to get percents of each species.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>iris_df <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cnt =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> formattable<span class="sc">::</span><span class="fu">percent</span>(cnt <span class="sc">/</span> <span class="fu">sum</span>(cnt)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 x 3
+  species      cnt freq      
+  &lt;fct&gt;      &lt;int&gt; &lt;formttbl&gt;
+1 setosa        50 33.33%    
+2 versicolor    50 33.33%    
+3 virginica     50 33.33%    </code></pre>
 </div>
 </div>
 
