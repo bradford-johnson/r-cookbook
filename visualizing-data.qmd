@@ -227,7 +227,7 @@ Scatter Plots are great ways to visualize relationships within datasets. There a
 
 This is an example of a simple scatter plot.
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 # load in data
 scatter_plot_df <- datasets::cars
 
@@ -246,7 +246,7 @@ library(tidyverse)
 library(gapminder)
 ```
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 gapminder %>%
   group_by(country) %>%
   ggplot(aes(x = log(gdpPercap), y = lifeExp, col = year, size = pop)) +
