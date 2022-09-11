@@ -221,7 +221,36 @@ chick_df %>%
 
 ## **Relationships**
 
-...
+### Scatter Plot
+
+Scatter Plots are great ways to visualize relationships within datasets. There are many different aesthetics you can control to add more layers to a scatter plot too.
+
+This is an example of a simple scatter plot.
+
+```{r}
+# load in data
+scatter_plot_df <- datasets::cars
+
+# create scatter plot 
+scatter_plot_df %>%
+  ggplot(aes(x = dist, y = speed)) +
+  geom_jitter() + 
+  labs(title = "Simple Scatter Plot", y = "Speed", x = "Distance") +
+  theme_classic()
+```
+
+A scatter plot with more layers can use aesthetics such as `size`, `fill`, `shape`, `geom_smooth()` or `facet_wrap()` . expectancy
+
+```{r}
+gapminder %>%
+  group_by(country) %>%
+  ggplot(aes(x = log(gdpPercap), y = lifeExp, col = year, size = pop)) +
+  geom_point(alpha = .3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~continent) +
+  labs(title = "Scatter Plot with more levels", x = "GDP Per Cap", y = "Life Expectancy") + 
+  theme_minimal()
+```
 
 ## **Composition**
 

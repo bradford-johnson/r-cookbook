@@ -27,7 +27,7 @@ library(tidyverse)
 
 # filter data for life exp and countries: US and Netherlands
 df1 <- gapminder %>%
-  select(country, lifeExp) %>%
+  select(country, lifeExp, year) %>%
   filter(country == "United States" | country == "Netherlands") 
   
  t.test(data = df1, lifeExp ~ country)
