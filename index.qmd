@@ -1,8 +1,6 @@
-# About {.unnumbered}
+# Status {.unnumbered}
 
-This is a cookbook for R created by Bradford Johnson. You can use the menu on the left the navigate the different chapters and the Table of contents on the right to see different sections for the current page you are on.
-
-This Quarto book contains vignettes of R code, and shows ways to approach each step of the data analysis process.
+![](https://img.shields.io/badge/%E2%9A%A0%EF%B8%8F-This%20repository%20is%20no%20longer%20active-inactive) ![](https://img.shields.io/badge/%E2%99%BB%EF%B8%8F-This%20project%20is%20being%20recreated%20and%20updated%20in%20the%20rblogr%20repository-informational)
 
 ## My Links
 
@@ -10,6 +8,28 @@ This Quarto book contains vignettes of R code, and shows ways to approach each s
 
 [**Project Repository Link**](https://github.com/bradfordjohnson/r-cookbook)
 
-## More about Quarto
+## About this project
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+This repository is an 'R cookbook' that I created with inspiration from others such as [Cookbook for R](http://www.cookbook-r.com/) or [R Graphics Cookbook](https://books.google.com/books?id=fxL4tu5bzAAC&printsec=frontcover&hl=en#v=onepage&q&f=false)
+
+**The reasons I wanted to create my own 'R Cookbook':**
+
+> **1.** I wanted to explore Quarto and learn how to create reports or tell a story.\
+> **2.** I like how 'cookbook' sounds...and to me it shows how analogous the overall processes for cooking food and data analytics are.
+>
+> **Examples of how I:**
+>
+> \- approach different problems
+>
+> \- craft aesthetics for visuals
+>
+> \- 'do data analytics' with R
+>
+> \
+> **Goals for my R Cookbook:**
+>
+> \- to make it a fun project that can share how powerful R and different packages can be
+>
+> \- help others who may be new to R or wanting to refine skills in specific areas
+>
+> \- show some of my skills and knowledge but also to get feedback and grow as a data analyst and R user myself
