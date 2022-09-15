@@ -1,11 +1,11 @@
 # r-cookbook | ![WIP](https://img.shields.io/badge/%E2%8F%B3-Work%20in%20progress-red)
 
-This repository is an 'R cookbook' that I created with inspiration from others such as [Cookbook for R](http://www.cookbook-r.com/) or [R Graphics Cookbook](https://books.google.com/books?id=fxL4tu5bzAAC&printsec=frontcover&hl=en#v=onepage&q&f=false)
+This repository is an 'R cookbook' that I created with inspiration from others such as [Cookbook for R](http://www.cookbook-r.com/) or [R Graphics Cookbook](https://books.google.com/books?id=fxL4tu5bzAAC&printsec=frontcover&hl=en#v=onepage&q&f=false) 
 <br> <br> 
 **The reasons I wanted to create my own 'R Cookbook':** <br> 
-> **1.** I like how 'cookbook' sounds...and to me it shows how analogous the overall processes for cooking food and data analytics are.
+> **1.** I wanted to explore Quarto and learn how to create reports or tell a story.  
 > <br> 
-> **2.** I wanted to create a product for myself and others to reference. One that can be updated with time, and shows vignettes of my code...  
+> **2.** I like how 'cookbook' sounds...and to me it shows how analogous the overall processes for cooking food and data analytics are.
 > <br> 
 > **Examples of how I:**
 > > - approach different problems
